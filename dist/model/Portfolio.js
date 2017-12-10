@@ -14,13 +14,17 @@ var _Coinmarket = require('./Coinmarket');
 
 var _Coinmarket2 = _interopRequireDefault(_Coinmarket);
 
-var _settings = require('./../../settings.json');
+var _table = require('table');
 
-var _settings2 = _interopRequireDefault(_settings);
+var _Format = require('./../Format');
+
+var _Format2 = _interopRequireDefault(_Format);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var settings = require('./../../settings.json');
 
 var portfolio = {};
 var highestRank = 0;
@@ -95,27 +99,53 @@ var Portfolio = function () {
   }, {
     key: 'getOutput',
     value: function getOutput() {
-      var NEW_LINE = '\n';
-      var result = '--------------------------------------------------------' + NEW_LINE;
+      var data = [['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'DELTA', 'DELTA', 'DELTA', 'REBALANCE'], ['', '', '', '฿', '$', 'actual %', 'target %', '%', '฿', '$', '']];
       var sortedKeys = _Utils2.default.getSortedKeys(portfolio, 'rank');
       for (var index in sortedKeys) {
         if (!sortedKeys.hasOwnProperty(index)) {
           continue;
         }
-        var symbol = sortedKeys[index];
-        var coin = portfolio[symbol];
-        var rank = _Utils2.default.pad(3, coin.getRank(), ' ');
-        var btcValue = _Utils2.default.pad(5, coin.getBtcValue().toFixed(2), ' ');
-        var usdValue = _Utils2.default.pad(6, coin.getUsdValue().toFixed(0), ' ');
-        var relMC = _Utils2.default.pad(5, (coin.getRelativeMarketCap() * 100).toFixed(1), ' ');
-        var relMCRecommended = _Utils2.default.pad(4, (coin.getRelativeMarketCapRecommended() * 100).toFixed(1), ' ');
-        var deltaAbs = _Utils2.default.round((coin.getRelativeMarketCap() - coin.getRelativeMarketCapRecommended()) * 100, 1);
-        var relMCDelta = Math.abs(deltaAbs) > _settings2.default.options.rebalanceDeltaPct ? '[' + (deltaAbs > 0 ? '+' : '') + deltaAbs + '%]' : '';
-        result += rank + '. ' + _Utils2.default.pad(5, symbol, ' ') + ': ' + btcValue + ' BTC | ' + usdValue + ' USD | ' + relMC + '% (' + relMCRecommended + '%)' + relMCDelta + NEW_LINE;
+        var coin = portfolio[sortedKeys[index]];
+
+        data.push([coin.getRank(), coin.getSymbol(), _Utils2.default.round(coin.getAmount(), 1), _Format2.default.bitcoin(coin.getBtcValue()), _Format2.default.money(coin.getUsdValue(), 0), _Format2.default.percent(coin.getRelativeMarketCap()), _Format2.default.percent(coin.getRelativeMarketCapRecommended()), _Format2.default.addPlusSign(_Format2.default.percent(coin.getAllocationDeltaPct())), _Format2.default.addPlusSign(_Format2.default.bitcoin(coin.getAllocationDeltaBtc(this.getSumBtc()))), _Format2.default.addPlusSign(_Format2.default.money(coin.getAllocationDeltaUsd(this.getSumUsd()))), coin.getAllocationDeltaPct() * 100 > settings.options.rebalanceDeltaPct ? 'Y' : '']);
       }
-      result += '--------------------------------------------------------' + NEW_LINE;
-      result += 'TOTAL: ' + this.getSumBtc().toFixed(2) + ' BTC | ' + this.getSumUsd().toFixed(0) + ' USD';
-      return result;
+
+      data.push(['', '', '', _Format2.default.bitcoin(this.getSumBtc()), _Format2.default.money(this.getSumUsd()), '', '', '', '', '', '']);
+      var config = {
+        columns: {
+          2: {
+            alignment: 'right'
+          },
+          3: {
+            alignment: 'right'
+          },
+          4: {
+            alignment: 'right'
+          },
+          5: {
+            alignment: 'right'
+          },
+          6: {
+            alignment: 'right'
+          },
+          7: {
+            alignment: 'right'
+          },
+          8: {
+            alignment: 'right'
+          },
+          9: {
+            alignment: 'right'
+          },
+          10: {
+            alignment: 'center'
+          }
+        },
+        drawHorizontalLine: function drawHorizontalLine(index, size) {
+          return index === 0 || index === 2 || index === size - 1 || index === size;
+        }
+      };
+      return (0, _table.table)(data, config);
     }
   }]);
 
