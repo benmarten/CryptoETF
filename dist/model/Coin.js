@@ -82,6 +82,21 @@ var Coin = function () {
       return _Coinmarket2.default.getRelativeMarketCapForX(this.symbol);
     }
   }, {
+    key: 'getAllocationDeltaPct',
+    value: function getAllocationDeltaPct() {
+      return this.getRelativeMarketCap() - this.getRelativeMarketCapRecommended();
+    }
+  }, {
+    key: 'getAllocationDeltaBtc',
+    value: function getAllocationDeltaBtc(total) {
+      return this.getBtcValue() - Math.abs(this.getRelativeMarketCapRecommended() * total);
+    }
+  }, {
+    key: 'getAllocationDeltaUsd',
+    value: function getAllocationDeltaUsd(total) {
+      return this.getUsdValue() - Math.abs(this.getRelativeMarketCapRecommended() * total);
+    }
+  }, {
     key: 'getRank',
     value: function getRank() {
       return this.rank;

@@ -42,7 +42,6 @@ describe('Testing Portfolio', () => {
   })
   it('Test output', async () => {
     await Coinmarket.init()
-    assert(Portfolio.getOutput())
     await Portfolio.addCoin(new Coin('BTC', 1))
     await Portfolio.addCoin(new Coin('BCH', 10))
     assert(Portfolio.getOutput())

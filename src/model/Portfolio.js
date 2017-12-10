@@ -1,6 +1,9 @@
 import Utils from './../Utils'
 import Coinmarket from './Coinmarket'
-import settings from './../../settings.json'
+import {table} from 'table'
+import Format from './../Format'
+
+const settings = require('./../../settings.json')
 
 let portfolio = {}
 let highestRank = 0
@@ -60,26 +63,78 @@ export default class Portfolio {
   }
 
   static getOutput() {
-    const NEW_LINE = '\n'
-    let result = `--------------------------------------------------------${NEW_LINE}`
+    let data = [
+      ['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'DELTA', 'DELTA', 'DELTA', 'REBALANCE'],
+      ['', '', '', '฿', '$', 'actual %', 'target %', '%', '฿', '$', '']
+    ]
     let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
     for (let index in sortedKeys) {
       if (!sortedKeys.hasOwnProperty(index)) {
         continue
       }
-      let symbol = sortedKeys[index]
-      let coin = portfolio[symbol]
-      let rank = Utils.pad(3, coin.getRank(), ' ')
-      let btcValue = Utils.pad(5, coin.getBtcValue().toFixed(2), ' ')
-      let usdValue = Utils.pad(6, (coin.getUsdValue()).toFixed(0), ' ')
-      let relMC = Utils.pad(5, (coin.getRelativeMarketCap() * 100).toFixed(1), ' ')
-      let relMCRecommended = Utils.pad(4, (coin.getRelativeMarketCapRecommended() * 100).toFixed(1), ' ')
-      let deltaAbs = Utils.round((coin.getRelativeMarketCap() - coin.getRelativeMarketCapRecommended()) * 100, 1)
-      let relMCDelta = (Math.abs(deltaAbs) > settings.options.rebalanceDeltaPct) ? `[${(deltaAbs > 0) ? '+' : ''}${deltaAbs}%]` : ''
-      result += `${rank}. ${Utils.pad(5, symbol, ' ')}: ${btcValue} BTC | ${usdValue} USD | ${relMC}% (${relMCRecommended}%)${relMCDelta}${NEW_LINE}`
+      let coin = portfolio[sortedKeys[index]]
+
+      data.push([
+        coin.getRank(),
+        coin.getSymbol(),
+        Utils.round(coin.getAmount(),1),
+        Format.bitcoin(coin.getBtcValue()),
+        Format.money(coin.getUsdValue(), 0),
+        Format.percent(coin.getRelativeMarketCap()),
+        Format.percent(coin.getRelativeMarketCapRecommended()),
+        Format.addPlusSign(Format.percent(coin.getAllocationDeltaPct())),
+        Format.addPlusSign(Format.bitcoin(coin.getAllocationDeltaBtc(this.getSumBtc()))),
+        Format.addPlusSign(Format.money(coin.getAllocationDeltaUsd(this.getSumUsd()))),
+        coin.getAllocationDeltaPct() * 100 > settings.options.rebalanceDeltaPct ? 'Y' : ''
+      ])
     }
-    result += `--------------------------------------------------------${NEW_LINE}`
-    result += `TOTAL: ${this.getSumBtc().toFixed(2)} BTC | ${(this.getSumUsd()).toFixed(0)} USD`
-    return result
+
+    data.push([
+      '',
+      '',
+      '',
+      Format.bitcoin(this.getSumBtc()),
+      Format.money(this.getSumUsd()),
+      '',
+      '',
+      '',
+      '',
+      '',
+      ''])
+    let config = {
+      columns: {
+        2: {
+          alignment: 'right'
+        },
+        3: {
+          alignment: 'right'
+        },
+        4: {
+          alignment: 'right'
+        },
+        5: {
+          alignment: 'right'
+        },
+        6: {
+          alignment: 'right'
+        },
+        7: {
+          alignment: 'right'
+        },
+        8: {
+          alignment: 'right'
+        },
+        9: {
+          alignment: 'right'
+        },
+        10: {
+          alignment: 'center'
+        }
+      },
+      drawHorizontalLine: (index, size) => {
+        return index === 0 || index === 2 || index === size - 1 || index === size
+      }
+    }
+    return table(data, config)
   }
 }

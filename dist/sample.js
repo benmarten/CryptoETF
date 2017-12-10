@@ -20,11 +20,15 @@ async function refreshPortfolio() {
       await _Coinmarket2.default.init();
 
       _Portfolio2.default.addCoin(new _Coin2.default('BTC', 3));
+      _Portfolio2.default.addCoin(new _Coin2.default('ETH', 20));
       _Portfolio2.default.addCoin(new _Coin2.default('BCH', 3));
-      _Portfolio2.default.addCoin(new _Coin2.default('ETH', 30));
+      _Portfolio2.default.addCoin(new _Coin2.default('MIOTA', 100));
+      _Portfolio2.default.addCoin(new _Coin2.default('XRP', 1000));
       _Portfolio2.default.addCoin(new _Coin2.default('LTC', 10));
-      _Portfolio2.default.addCoin(new _Coin2.default('XEM', 1000));
-      _Portfolio2.default.addCoin(new _Coin2.default('DASH', 1));
+      _Portfolio2.default.addCoin(new _Coin2.default('DASH', 2));
+      _Portfolio2.default.addCoin(new _Coin2.default('XMR', 10));
+      _Portfolio2.default.addCoin(new _Coin2.default('BTG', 3));
+      _Portfolio2.default.addCoin(new _Coin2.default('XEM', 10));
 
       await _Portfolio2.default.addMissingCoins();
       console.log(_Portfolio2.default.getOutput());

@@ -1,7 +1,7 @@
 # CoinETF
 *DISCLAIMER: This tool neither is, nor should be construed as an offer, solicitation, or recommendation to buy or sell any cryptoassets.*
 
-<img src="https://raw.githubusercontent.com/benmarten/CryptoETF/static/screenshot.png" width="451">
+<img src="https://raw.githubusercontent.com/benmarten/CryptoETF/static/screenshot.png" width="738">
 A CLI app, that pulls the cryptocoin balances from your exchanges and displayes your portoflio in comparison to the overall market. A recommendation is shown based on the ideal capitalization-weighted portfolio.
 
 ## Installation
