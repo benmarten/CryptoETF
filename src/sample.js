@@ -8,11 +8,15 @@ async function refreshPortfolio() {
       await Coinmarket.init()
 
       Portfolio.addCoin(new Coin('BTC', 3))
+      Portfolio.addCoin(new Coin('ETH', 20))
       Portfolio.addCoin(new Coin('BCH', 3))
-      Portfolio.addCoin(new Coin('ETH', 30))
+      Portfolio.addCoin(new Coin('MIOTA', 100))
+      Portfolio.addCoin(new Coin('XRP', 1000))
       Portfolio.addCoin(new Coin('LTC', 10))
-      Portfolio.addCoin(new Coin('XEM', 1000))
-      Portfolio.addCoin(new Coin('DASH', 1))
+      Portfolio.addCoin(new Coin('DASH', 2))
+      Portfolio.addCoin(new Coin('XMR', 10))
+      Portfolio.addCoin(new Coin('BTG', 3))
+      Portfolio.addCoin(new Coin('XEM', 10))
 
       await Portfolio.addMissingCoins()
       console.log(Portfolio.getOutput())

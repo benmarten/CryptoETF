@@ -57,6 +57,18 @@ export default class Coin {
     return Coinmarket.getRelativeMarketCapForX(this.symbol)
   }
 
+  getAllocationDeltaPct() {
+    return this.getRelativeMarketCap() - this.getRelativeMarketCapRecommended()
+  }
+
+  getAllocationDeltaBtc(total) {
+    return this.getBtcValue() - Math.abs(this.getRelativeMarketCapRecommended() * total)
+  }
+
+  getAllocationDeltaUsd(total) {
+    return this.getUsdValue() - Math.abs(this.getRelativeMarketCapRecommended() * total)
+  }
+
   getRank() {
     return this.rank
   }
