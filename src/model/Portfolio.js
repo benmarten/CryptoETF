@@ -77,7 +77,7 @@ export default class Portfolio {
       data.push([
         coin.getRank(),
         coin.getSymbol(),
-        Utils.round(coin.getAmount(),1),
+        Utils.round(coin.getAmount(), 1),
         Format.bitcoin(coin.getBtcValue()),
         Format.money(coin.getUsdValue(), 0),
         Format.percent(coin.getRelativeMarketCap()),
@@ -85,7 +85,7 @@ export default class Portfolio {
         Format.addPlusSign(Format.percent(coin.getAllocationDeltaPct())),
         Format.addPlusSign(Format.bitcoin(coin.getAllocationDeltaBtc(this.getSumBtc()))),
         Format.addPlusSign(Format.money(coin.getAllocationDeltaUsd(this.getSumUsd()))),
-        coin.getAllocationDeltaPct() * 100 > settings.options.rebalanceDeltaPct ? 'Y' : ''
+        (Math.abs(coin.getAllocationDeltaPct() * 100) > settings.options.rebalanceDeltaPct) ? 'Y' : ''
       ])
     }
 
