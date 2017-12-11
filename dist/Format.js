@@ -44,7 +44,7 @@ var Format = function () {
       if (!number) {
         return '';
       }
-      return _Utils2.default.round(number, 1).toFixed(1);
+      return _Utils2.default.round(number, 2).toFixed(2);
     }
   }, {
     key: 'addPlusSign',
