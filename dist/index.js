@@ -42,6 +42,8 @@ async function refreshPortfolio() {
 
       await _Portfolio2.default.addMissingCoins();
 
+      _Portfolio2.default.removeCoin('USDT');
+
       console.log(_Portfolio2.default.getOutput());
     } catch (error) {
       console.log(error);

@@ -55,6 +55,11 @@ var Portfolio = function () {
       }
     }
   }, {
+    key: 'removeCoin',
+    value: function removeCoin(symbol) {
+      delete portfolio[symbol];
+    }
+  }, {
     key: 'addCoins',
     value: async function addCoins(coins) {
       var _this = this;

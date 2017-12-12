@@ -26,6 +26,10 @@ export default class Portfolio {
     }
   }
 
+  static removeCoin(symbol) {
+    delete portfolio[symbol]
+  }
+
   static async addCoins(coins) {
     return new Promise(async (resolve) => {
       for (let index in coins) {
