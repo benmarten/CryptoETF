@@ -115,3 +115,5 @@ typings/
 .DS_Store
 settings.json
 yarn.lock
+dist/
+

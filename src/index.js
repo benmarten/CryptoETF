@@ -3,6 +3,7 @@ import PoloniexWallet from './model/PoloniexWallet'
 import Portfolio from './model/Portfolio'
 import Coinmarket from './model/Coinmarket'
 import Coin from './model/Coin'
+
 const settings = require('../settings.json')
 
 async function refreshPortfolio() {
@@ -10,18 +11,26 @@ async function refreshPortfolio() {
     try {
       await Coinmarket.init()
 
-      let coinbaseCoins = await CoinbaseWallet.getBalance()
-      await Portfolio.addCoins(coinbaseCoins)
+      if (settings.accounts.coinbase && settings.accounts.coinbase.length > 0) {
+        let coinbaseCoins = await CoinbaseWallet.getBalance()
+        await Portfolio.addCoins(coinbaseCoins)
+      }
 
-      let poloniexCoins = await PoloniexWallet.getBalance()
-      await Portfolio.addCoins(poloniexCoins)
+      if (settings.accounts.poloniex && settings.accounts.poloniex.length > 0) {
+        let poloniexCoins = await PoloniexWallet.getBalance()
+        await Portfolio.addCoins(poloniexCoins)
+      }
 
       for (let index in settings.otherHoldings) {
-        let otherHolding = settings.otherHoldings[index]
-        Portfolio.addCoin(new Coin(Object.keys(otherHolding)[0], Object.values(otherHolding)[0]))
+        if (settings.otherHoldings.hasOwnProperty(index)) {
+          let otherHolding = settings.otherHoldings[index]
+          Portfolio.addCoin(new Coin(Object.keys(otherHolding)[0], Object.values(otherHolding)[0]))
+        }
       }
 
       await Portfolio.addMissingCoins()
+
+      Portfolio.removeCoin('USDT')
 
       console.log(Portfolio.getOutput())
     } catch (error) {

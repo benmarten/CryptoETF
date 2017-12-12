@@ -1,7 +1,7 @@
-# CoinETF
+# CryptoETF
 *DISCLAIMER: This tool neither is, nor should be construed as an offer, solicitation, or recommendation to buy or sell any cryptoassets.*
 
-<img src="https://raw.githubusercontent.com/benmarten/CryptoETF/static/screenshot.png" width="738">
+<img src="https://raw.githubusercontent.com/benmarten/CryptoETF/static/screenshot.jpg" width="990">
 A CLI app, that pulls the cryptocoin balances from your exchanges and displayes your portoflio in comparison to the overall market. A recommendation is shown based on the ideal capitalization-weighted portfolio.
 
 ## Installation
@@ -16,6 +16,11 @@ Run the sample:
 `node sample`
 Edit settings.json with your exchange api keys, then:
 `node index`
+
+## Exchanges
+CryptoETF has API integrations with the following exchanges:
+- Coinbase. Join Here: https://www.coinbase.com/join/587ab088801bae035cad02c5
+- Poloniex. Join Here: 
 
 ## Test
 `npm test`
