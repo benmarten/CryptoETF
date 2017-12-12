@@ -7,14 +7,14 @@ describe('Testing formatter', () => {
     assert(Format.money(null) === '')
   })
   it('format.percent', async () => {
-    assert(Format.bitcoin(99.01) === '99.0')
-    assert(Format.bitcoin(1) === '1.0')
-    assert(Format.bitcoin(0.001) === '0.0')
+    assert(Format.bitcoin(99.01) === '99.01')
+    assert(Format.bitcoin(1) === '1.00')
+    assert(Format.bitcoin(0.001) === '0.00')
     assert(Format.bitcoin(null) === '')
   })
   it('format.bitcoin', async () => {
-    assert(Format.bitcoin(1000.01) === '1000.0')
-    assert(Format.bitcoin(1000) === '1000.0')
+    assert(Format.bitcoin(1000.01) === '1000.01')
+    assert(Format.bitcoin(1000) === '1000.00')
     assert(Format.bitcoin(null) === '')
   })
   it('format.addPlusSign', async () => {
