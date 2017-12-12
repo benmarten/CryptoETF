@@ -15,6 +15,13 @@ describe('Testing Portfolio', () => {
     assert(coin === coin2)
     assert(coin2.getAmount() === 1)
   })
+  it('remove', async () => {
+    let coin = new Coin('XXX', 1)
+    assert(coin)
+    Portfolio.addCoin(coin)
+    Portfolio.removeCoin(coin.getSymbol())
+    assert(!Portfolio.getCoin(coin.getSymbol()))
+  })
   it('add second', async () => {
     Portfolio.addCoin(new Coin('BTC', 1))
     Portfolio.addCoin(new Coin('BTC', 2))
@@ -42,8 +49,11 @@ describe('Testing Portfolio', () => {
   })
   it('Test output', async () => {
     await Coinmarket.init()
-    await Portfolio.addCoin(new Coin('BTC', 1))
-    await Portfolio.addCoin(new Coin('BCH', 10))
-    assert(Portfolio.getOutput())
+    await Portfolio.addCoin(new Coin('BTC', 1.37))
+    await Portfolio.addCoin(new Coin('ETH', 10))
+    Portfolio.addMissingCoins(5)
+    let result = Portfolio.getOutput()
+    console.log(result)
+    assert(result)
   })
 })

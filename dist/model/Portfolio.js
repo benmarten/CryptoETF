@@ -55,6 +55,11 @@ var Portfolio = function () {
       }
     }
   }, {
+    key: 'removeCoin',
+    value: function removeCoin(symbol) {
+      delete portfolio[symbol];
+    }
+  }, {
     key: 'addCoins',
     value: async function addCoins(coins) {
       var _this = this;
@@ -92,25 +97,48 @@ var Portfolio = function () {
     }
   }, {
     key: 'addMissingCoins',
-    value: async function addMissingCoins() {
-      var topXCoins = _Coinmarket2.default.getCoins(highestRank);
+    value: async function addMissingCoins(limitByRank) {
+      var topX = limitByRank ? limitByRank : highestRank;
+      var topXCoins = _Coinmarket2.default.getCoins(topX);
       await Portfolio.addCoins(topXCoins);
+    }
+  }, {
+    key: 'getStretchFactor',
+    value: function getStretchFactor() {
+      var totalPortfolioPct = 0;
+      for (var index in portfolio) {
+        if (!portfolio.hasOwnProperty(index)) {
+          continue;
+        }
+        var coin = portfolio[index];
+        totalPortfolioPct += coin.getRelativeMarketCapRecommended();
+      }
+      return totalPortfolioPct;
     }
   }, {
     key: 'getOutput',
     value: function getOutput() {
-      var data = [['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'DELTA', 'DELTA', 'DELTA', 'REBALANCE'], ['', '', '', '฿', '$', 'actual %', 'target %', '%', '฿', '$', '']];
+      var stretchFactor = Portfolio.getStretchFactor();
+      var data = [['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'TARGET', 'TARGET', 'BUY/SELL', 'BUY/SELL', 'DRIFT', 'REBALANCE'], ['', '', '', '฿', '$', 'actual %', 'target %', '฿', '$', '฿', '$', '%', '']];
       var sortedKeys = _Utils2.default.getSortedKeys(portfolio, 'rank');
+      var targetSum = [];
+      settings.options.targetValueBtc = settings.options.targetValueUsd / _Coinmarket2.default.getBtcUsd();
+      targetSum['targetBtc'] = 0;
+      targetSum['targetUsd'] = 0;
       for (var index in sortedKeys) {
         if (!sortedKeys.hasOwnProperty(index)) {
           continue;
         }
         var coin = portfolio[sortedKeys[index]];
-
-        data.push([coin.getRank(), coin.getSymbol(), _Utils2.default.round(coin.getAmount(), 1), _Format2.default.bitcoin(coin.getBtcValue()), _Format2.default.money(coin.getUsdValue(), 0), _Format2.default.percent(coin.getRelativeMarketCap()), _Format2.default.percent(coin.getRelativeMarketCapRecommended()), _Format2.default.addPlusSign(_Format2.default.percent(coin.getAllocationDeltaPct())), _Format2.default.addPlusSign(_Format2.default.bitcoin(coin.getAllocationDeltaBtc(this.getSumBtc()))), _Format2.default.addPlusSign(_Format2.default.money(coin.getAllocationDeltaUsd(this.getSumUsd()))), coin.getAllocationDeltaPct() * 100 > settings.options.rebalanceDeltaPct ? 'Y' : '']);
+        var targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueBtc;
+        var targetUsd = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueUsd;
+        var drift = Math.abs((coin.getUsdValue() - targetUsd) / settings.options.targetValueUsd);
+        data.push([coin.getRank(), coin.getSymbol(), _Utils2.default.round(coin.getAmount(), 2), _Format2.default.bitcoin(coin.getBtcValue()), _Format2.default.money(coin.getUsdValue(), 0), _Format2.default.percent(coin.getRelativeMarketCap()), _Format2.default.percent(coin.getRelativeMarketCapRecommended() / stretchFactor), _Format2.default.bitcoin(targetBtc), _Format2.default.money(targetUsd), targetBtc - coin.getBtcValue(), _Format2.default.money(targetUsd - coin.getUsdValue()), _Format2.default.percent(drift), drift * 100 > settings.options.rebalanceDeltaPct ? 'Y' : '']);
+        targetSum['targetBtc'] += targetBtc;
+        targetSum['targetUsd'] += targetUsd;
       }
 
-      data.push(['', '', '', _Format2.default.bitcoin(this.getSumBtc()), _Format2.default.money(this.getSumUsd()), '', '', '', '', '', '']);
+      data.push(['', '', '', _Format2.default.bitcoin(this.getSumBtc()), _Format2.default.money(this.getSumUsd()), '', '', _Format2.default.bitcoin(targetSum['targetBtc']), _Format2.default.money(targetSum['targetUsd']), '', '', '', '']);
       var config = {
         columns: {
           2: {
@@ -138,7 +166,10 @@ var Portfolio = function () {
             alignment: 'right'
           },
           10: {
-            alignment: 'center'
+            alignment: 'right'
+          },
+          12: {
+            alignment: 'right'
           }
         },
         drawHorizontalLine: function drawHorizontalLine(index, size) {

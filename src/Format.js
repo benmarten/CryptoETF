@@ -22,7 +22,7 @@ export default class Format {
     if (!number) {
       return ''
     }
-    return Utils.round(number, 1).toFixed(1)
+    return Utils.round(number, 2).toFixed(2)
   }
 
   static addPlusSign(number) {
