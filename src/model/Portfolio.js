@@ -88,6 +88,8 @@ export default class Portfolio {
     let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
     let targetSum = []
     settings.options.targetValueBtc = settings.options.targetValueUsd / Coinmarket.getBtcUsd()
+    targetSum['allocationActualPct'] = 0
+    targetSum['allocationTargetPct'] = 0
     targetSum['targetBtc'] = 0
     targetSum['targetUsd'] = 0
     for (let index in sortedKeys) {
@@ -95,6 +97,8 @@ export default class Portfolio {
         continue
       }
       let coin = portfolio[sortedKeys[index]]
+      let allocationActualPct = coin.getRelativeMarketCap()
+      let allocationTargetPct = coin.getRelativeMarketCapRecommended() / stretchFactor
       let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueBtc
       let targetUsd = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueUsd
       let drift = Math.abs((coin.getUsdValue() - targetUsd) / settings.options.targetValueUsd)
@@ -104,8 +108,8 @@ export default class Portfolio {
         Utils.round(coin.getAmount(), 2),
         Format.bitcoin(coin.getBtcValue()),
         Format.money(coin.getUsdValue(), 0),
-        Format.percent(coin.getRelativeMarketCap()),
-        Format.percent(coin.getRelativeMarketCapRecommended() / stretchFactor),
+        Format.percent(allocationActualPct),
+        Format.percent(allocationTargetPct),
         Format.bitcoin(targetBtc),
         Format.money(targetUsd),
         targetBtc - coin.getBtcValue(),
@@ -113,24 +117,27 @@ export default class Portfolio {
         Format.percent(drift),
         (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : ''
       ])
+      targetSum['allocationActualPct'] += allocationActualPct || 0
+      targetSum['allocationTargetPct'] += allocationTargetPct || 0
       targetSum['targetBtc'] += targetBtc
       targetSum['targetUsd'] += targetUsd
     }
 
+    let drift = (targetSum['targetBtc'] - this.getSumBtc()) / targetSum['targetBtc']
     data.push([
       '',
       '',
       '',
       Format.bitcoin(this.getSumBtc()),
       Format.money(this.getSumUsd()),
-      '',
-      '',
+      Format.percent(targetSum['allocationActualPct']),
+      Format.percent(targetSum['allocationTargetPct']),
       Format.bitcoin(targetSum['targetBtc']),
       Format.money(targetSum['targetUsd']),
-      '',
-      '',
-      '',
-      ''])
+      Format.bitcoin(targetSum['targetBtc'] - this.getSumBtc()),
+      Format.money(targetSum['targetUsd'] - this.getSumUsd()),
+      Format.percent(drift),
+      (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : ''])
     let config = {
       columns: {
         2: {
