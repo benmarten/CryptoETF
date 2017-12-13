@@ -137,7 +137,7 @@ export default class Portfolio {
       Format.bitcoin(targetSum['targetBtc'] - this.getSumBtc()),
       Format.money(targetSum['targetUsd'] - this.getSumUsd()),
       Format.percent(drift),
-      (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : ''])
+      (Math.abs(drift) * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : ''])
     let config = {
       columns: {
         2: {
