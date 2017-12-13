@@ -26,6 +26,7 @@
     }
   ],
   "options": {
+    "targetValueUsd": 50000,
     "rebalanceDeltaPct": 1.0
   }
 }
