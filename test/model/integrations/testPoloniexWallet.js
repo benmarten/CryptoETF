@@ -3,7 +3,7 @@ import assert from 'assert'
 
 describe('Testing Coinbase integration', () => {
   it('Testing initial connection and balances', async () => {
-    let poloniexWallet = await PoloniexWallet.getBalance()
-    assert(Object.keys(poloniexWallet).length > 0)
+    let wallet = await PoloniexWallet.getBalance()
+    assert(Object.keys(wallet).length > 0)
   })
 })

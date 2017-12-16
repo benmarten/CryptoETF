@@ -20,6 +20,12 @@
     ],
     "binance": [
       {
+        "key": "",
+        "secret": ""
+      }
+    ],
+    "hitbtc": [
+      {
         "apiKey": "",
         "apiSecret": ""
       }
@@ -27,7 +33,8 @@
   },
   "symbolMapping": {
     "USD": "USDT",
-    "STR": "XLM"
+    "STR": "XLM",
+    "IOTA": "MIOTA"
   },
   "otherHoldings": [
     {
