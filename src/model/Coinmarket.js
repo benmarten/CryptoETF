@@ -125,7 +125,7 @@ export default class Coinmarket {
   static getCoins(limit) {
     let result = {}
     for (let key in coins) {
-      result[key] = new Coin(coins[key].symbol, 0, coins[key].rank)
+      result[key] = new Coin(coins[key].symbol, 0, null, coins[key].rank)
       if (result[key].rank === limit) {
         break
       }

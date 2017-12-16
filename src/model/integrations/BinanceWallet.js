@@ -1,15 +1,12 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
+import Binance from 'Binance'
 
 const settings = require('../../../settings.json')
-const Binance = require('binance')
-
-let wallet = {}
 
 export default class BinanceWallet {
-  static async getBalance() {
-    await PromiseUtils.forEachPromise(settings.accounts.binance, this._getBalanceForCredential)
-    return wallet
+  static getBalance() {
+    return PromiseUtils.forEachPromise(settings.accounts.binance, this._getBalanceForCredential)
   }
 
   /**
@@ -26,26 +23,16 @@ export default class BinanceWallet {
             if (err) {
               return reject(err)
             }
+            let result = []
             let balances = account.balances
             for (let index in balances) {
               let data = balances[index]
               let symbol = data.asset
               let amount = data.free
 
-              if (amount === '0.00000000') {
-                continue
-              }
-
-              let coin
-              if (wallet[symbol]) {
-                coin = wallet[symbol]
-                coin.addAmount(amount)
-              } else {
-                coin = new Coin(symbol, amount)
-              }
-              wallet[symbol] = coin
+              result.push(new Coin(symbol, amount, 'Binance'))
             }
-            resolve(wallet)
+            resolve(result)
           })
         }
     )

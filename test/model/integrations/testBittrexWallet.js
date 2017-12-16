@@ -4,6 +4,6 @@ import assert from 'assert'
 describe('Testing Bittrex integration', () => {
   it('Testing initial connection and balances', async () => {
     let wallet = await BittrexWallet.getBalance()
-    assert(Object.keys(wallet).length > 0)
+    assert(wallet.length > 0)
   })
 })

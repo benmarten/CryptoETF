@@ -4,12 +4,9 @@ import Coin from '../Coin'
 const Coinbase = require('coinbase').Client
 const settings = require('../../../settings.json')
 
-let wallet = {}
-
 export default class CoinbaseWallet {
-  static async getBalance() {
-    await PromiseUtils.forEachPromise(settings.accounts.coinbase, this._getBalanceForCredential)
-    return wallet
+  static getBalance() {
+    return PromiseUtils.forEachPromise(settings.accounts.coinbase, this._getBalanceForCredential)
   }
 
   /**
@@ -26,21 +23,12 @@ export default class CoinbaseWallet {
         if (err) {
           return reject(err)
         }
+        let result = []
         accounts.forEach(account => {
-          if (account.balance.amount !== '0.00000000') {
-            let symbol = account.balance.currency
-
-            let coin
-            if (wallet[symbol]) {
-              coin = wallet[symbol]
-              coin.addAmount(account.balance.amount)
-            } else {
-              coin = new Coin(symbol, account.balance.amount)
-            }
-            wallet[symbol] = coin
-          }
+          let symbol = account.balance.currency
+          result.push(new Coin(symbol, account.balance.amount, 'Coinbase'))
         })
-        resolve(wallet)
+        resolve(result)
       })
     })
   }

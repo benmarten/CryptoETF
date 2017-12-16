@@ -1,10 +1,8 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
+import Poloniex from 'poloniex-api-node'
 
 const settings = require('../../../settings.json')
-const Poloniex = require('poloniex-api-node')
-
-let wallet = {}
 
 export default class PoloniexWallet {
   static getBalance() {
@@ -26,23 +24,13 @@ export default class PoloniexWallet {
         if (err) {
           return reject(err)
         }
+        let result = []
         for (let symbol in positions) {
           // noinspection JSUnfilteredForInLoop
-          let coin = positions[symbol]
-          if (positions.hasOwnProperty(symbol) && coin.available !== '0.00000000' &&
-              parseFloat(coin.btcValue) > 0.0001) {
-            let coin
-            let value = positions[symbol].available
-            if (wallet[symbol]) {
-              coin = wallet[symbol]
-              coin.addAmount(value)
-            } else {
-              coin = new Coin(symbol, value)
-            }
-            wallet[symbol] = coin
-          }
+          let value = positions[symbol].available
+          result.push(new Coin(symbol, value, 'Poloniex'))
         }
-        resolve(wallet)
+        resolve(result)
       })
     })
   }

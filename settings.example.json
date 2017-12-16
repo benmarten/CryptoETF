@@ -46,6 +46,7 @@
   ],
   "options": {
     "targetValueUsd": 50000,
-    "rebalanceDeltaPct": 1.0
+    "rebalanceDeltaPct": 1.0,
+    "minValueBtc": 0.0001
   }
 }

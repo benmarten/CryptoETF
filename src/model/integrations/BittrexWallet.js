@@ -1,15 +1,12 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
+import Bittrex from 'node-bittrex-api'
 
 const settings = require('../../../settings.json')
-const Bittrex = require('node-bittrex-api')
-
-let wallet = {}
 
 export default class BittrexWallet {
-  static async getBalance() {
-    await PromiseUtils.forEachPromise(settings.accounts.bittrex, this._getBalanceForCredential)
-    return wallet
+  static getBalance() {
+    return PromiseUtils.forEachPromise(settings.accounts.bittrex, this._getBalanceForCredential)
   }
 
   /**
@@ -26,24 +23,16 @@ export default class BittrexWallet {
             if (err) {
               return reject(err)
             }
+            let result = []
             let balances = data.result
             for (let index in balances) {
               let data = balances[index]
-              if (data.Balance > 0) {
-                let symbol = data.Currency
-                let amount = data.Balance
+              let symbol = data.Currency
+              let amount = data.Balance
 
-                let coin
-                if (wallet[symbol]) {
-                  coin = wallet[symbol]
-                  coin.addAmount(amount)
-                } else {
-                  coin = new Coin(symbol, amount)
-                }
-                wallet[symbol] = coin
-              }
+              result.push(new Coin(symbol, amount, 'Bittrex'))
             }
-            resolve(wallet)
+            resolve(result)
           })
         }
     )

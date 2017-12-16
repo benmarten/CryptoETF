@@ -4,12 +4,9 @@ import Coin from './../Coin'
 
 const settings = require('../../../settings.json')
 
-let wallet = {}
-
 export default class HitbtcWallet {
-  static async getBalance() {
-    await PromiseUtils.forEachPromise(settings.accounts.hitbtc, this._getBalanceForCredential)
-    return wallet
+  static getBalance() {
+    return PromiseUtils.forEachPromise(settings.accounts.hitbtc, this._getBalanceForCredential)
   }
 
   /**
@@ -34,26 +31,17 @@ export default class HitbtcWallet {
             if (error || response.statusCode !== 200) {
               return reject(err)
             }
+            let result = []
             let balances = JSON.parse(body)
             for (let index in balances) {
               let data = balances[index]
               let symbol = data.currency
               let amount = data.available
 
-              if (parseFloat(amount) === 0) {
-                continue
-              }
+              result.push(new Coin(symbol, amount, 'HitBTC'))
 
-              let coin
-              if (wallet[symbol]) {
-                coin = wallet[symbol]
-                coin.addAmount(amount)
-              } else {
-                coin = new Coin(symbol, amount)
-              }
-              wallet[symbol] = coin
             }
-            resolve(wallet)
+            resolve(result)
           })
         }
     )
