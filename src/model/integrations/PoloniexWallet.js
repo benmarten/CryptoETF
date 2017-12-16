@@ -1,7 +1,7 @@
-import PromiseUtils from '../PromiseUtils'
-import Coin from './Coin'
+import PromiseUtils from '../../PromiseUtils'
+import Coin from '../Coin'
 
-const settings = require('../../settings.json')
+const settings = require('../../../settings.json')
 const Poloniex = require('poloniex-api-node')
 
 let wallet = {}

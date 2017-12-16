@@ -1,4 +1,4 @@
-import CoinbaseWallet from '../../src/model/CoinbaseWallet'
+import CoinbaseWallet from '../../../src/model/integrations/CoinbaseWallet'
 import assert from 'assert'
 
 describe('Testing Coinbase integration', () => {

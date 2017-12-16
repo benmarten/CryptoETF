@@ -2,6 +2,7 @@
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "coinbase": "^2.0.6",
+    "node-bittrex-api": "^0.8.1",
     "poloniex-api-node": "^1.6.5",
     "request-promise": "^4.2.2",
     "table": "^4.0.2"

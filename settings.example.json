@@ -11,6 +11,18 @@
         "apiKey": "",
         "apiSecret": ""
       }
+    ],
+    "bittrex": [
+      {
+        "apikey": "",
+        "apisecret": ""
+      }
+    ],
+    "binance": [
+      {
+        "apiKey": "",
+        "apiSecret": ""
+      }
     ]
   },
   "symbolMapping": {

@@ -1,8 +1,8 @@
-import PromiseUtils from '../PromiseUtils'
-import Coin from './Coin'
+import PromiseUtils from '../../PromiseUtils'
+import Coin from '../Coin'
 
 const Coinbase = require('coinbase').Client
-const settings = require('../../settings.json')
+const settings = require('../../../settings.json')
 
 let wallet = {}
 

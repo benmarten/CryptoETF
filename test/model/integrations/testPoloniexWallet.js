@@ -1,4 +1,4 @@
-import PoloniexWallet from '../../src/model/PoloniexWallet'
+import PoloniexWallet from '../../../src/model/integrations/PoloniexWallet'
 import assert from 'assert'
 
 describe('Testing Coinbase integration', () => {
