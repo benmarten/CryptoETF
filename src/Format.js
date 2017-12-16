@@ -18,11 +18,12 @@ export default class Format {
     return Utils.round(number * 100, 3).toFixed(1)
   }
 
-  static bitcoin(number) {
+  static bitcoin(number, chars_) {
+    let chars = (chars_) ? chars_ : 2
     if (!number) {
       return ''
     }
-    return Utils.round(number, 2).toFixed(2)
+    return Utils.round(number, chars).toFixed(chars)
   }
 
   static addPlusSign(number) {

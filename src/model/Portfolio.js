@@ -111,8 +111,8 @@ export default class Portfolio {
   static getOutput() {
     let stretchFactor = Portfolio.getStretchFactor()
     let data = [
-      ['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'TARGET', 'TARGET', 'BUY/SELL', 'BUY/SELL', 'DRIFT', 'REBALANCE', 'EXCHANGES'],
-      ['', '', '', '฿', '$', 'actual %', 'target %', '฿', '$', '฿', '$', '%', '', '']
+      ['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'TARGET', 'TARGET', 'BUY/SELL', 'BUY/SELL', 'BUY/SELL', 'DRIFT', 'REBALANCE', 'EXCHANGES'],
+      ['', '', '', '฿', '$', 'actual %', 'target %', '฿', '$', '฿', 'ETH', '$', '%', '', '']
     ]
     let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
     let targetSum = []
@@ -141,7 +141,8 @@ export default class Portfolio {
         Format.percent(allocationTargetPct),
         Format.bitcoin(targetBtc),
         Format.money(targetUsd),
-        targetBtc - coin.getBtcValue(),
+        Format.bitcoin(targetBtc - coin.getBtcValue(), 8),
+        Format.bitcoin((targetBtc - coin.getBtcValue()) / Coinmarket.getBtcEth(), 8),
         Format.money(targetUsd - coin.getUsdValue()),
         Format.percent(drift),
         (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : '',
@@ -165,6 +166,7 @@ export default class Portfolio {
       Format.bitcoin(targetSum['targetBtc']),
       Format.money(targetSum['targetUsd']),
       Format.bitcoin(targetSum['targetBtc'] - this.getSumBtc()),
+      '',
       Format.money(targetSum['targetUsd'] - this.getSumUsd()),
       Format.percent(drift),
       (Math.abs(drift) * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : '',
@@ -199,7 +201,13 @@ export default class Portfolio {
         10: {
           alignment: 'right'
         },
+        11: {
+          alignment: 'right'
+        },
         12: {
+          alignment: 'right'
+        },
+        13: {
           alignment: 'right'
         }
       },

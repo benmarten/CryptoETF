@@ -122,6 +122,10 @@ export default class Coinmarket {
     return coins['BTC'].price_usd
   }
 
+  static getBtcEth() {
+    return coins['ETH'].price_btc
+  }
+
   static getCoins(limit) {
     let result = {}
     for (let key in coins) {
