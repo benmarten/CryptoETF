@@ -13,6 +13,7 @@ async function refreshPortfolio() {
       Portfolio.addCoin(new Coin('MIOTA', 100, 'Coinbase'))
       Portfolio.addCoin(new Coin('XRP', 1000, 'Poloniex'))
       Portfolio.addCoin(new Coin('LTC', 10, 'Coinbase'))
+      Portfolio.addCoin(new Coin('ADA', 200, 'Bittrex'))
       Portfolio.addCoin(new Coin('DASH', 2, 'Poloniex'))
       Portfolio.addCoin(new Coin('XMR', 10, 'Poloniex'))
       Portfolio.addCoin(new Coin('XEM', 10, 'Poloniex'))
