@@ -22,6 +22,7 @@ async function refreshPortfolio() {
             try {
               if (settings.accounts.hasOwnProperty(account) && settings.accounts[account] &&
                   settings.accounts[account].length > 0) {
+                console.log(`Retrieving ${name} balance...`)
                 let coins = await integrations[name].default.getBalance()
                 await Portfolio.addCoins(coins)
               }

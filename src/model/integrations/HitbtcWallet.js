@@ -1,5 +1,5 @@
 import PromiseUtils from '../../PromiseUtils'
-import request from 'request'
+import request from 'requestretry'
 import Coin from './../Coin'
 
 const settings = require('../../../settings.json')
@@ -24,12 +24,15 @@ export default class HitbtcWallet {
             headers: {
               'Host': 'api.hitbtc.com',
               'Authorization': `Basic ${apiKeyBase64}`
-            }
+            },
+            maxAttempts: 10,   // (default) try 5 times
+            retryDelay: 5000,  // (default) wait for 5s before trying again
           }
 
           request(options, (error, response, body) => {
             if (error || response.statusCode !== 200) {
-              return reject(err)
+              reject(error)
+              return
             }
             let result = []
             let balances = JSON.parse(body)
