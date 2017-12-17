@@ -1,7 +1,7 @@
 # CryptoETF
 *DISCLAIMER: This tool neither is, nor should be construed as an offer, solicitation, or recommendation to buy or sell any cryptoassets.*
 
-<img src="https://raw.githubusercontent.com/benmarten/CryptoETF/static/screenshot.jpg" width="990">
+<img src="https://raw.githubusercontent.com/benmarten/CryptoETF/static/screenshot.jpg" width="1102">
 A CLI app, that pulls the cryptocoin balances from your exchanges and displayes your portoflio in comparison to the overall market. A recommendation is shown based on the ideal capitalization-weighted portfolio.
 
 ## Installation
@@ -24,6 +24,8 @@ CryptoETF has API integrations with the following exchanges:
 - Bittrex. Join Here: https://www.bittrex.com
 - Binance. Join Here: https://www.binance.com/?ref=12278261
 - HitBTC. Join Here: https://hitbtc.com/?ref_id=5a3596f643b9e
+
+With these exchanges, you can easily build yourself your own CryptoETF.
 
 ## Test
 `npm test`
