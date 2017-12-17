@@ -1,5 +1,6 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
+// noinspection NpmUsedModulesInstalled
 import Binance from 'Binance'
 
 const settings = require('../../../settings.json')
@@ -15,6 +16,8 @@ export default class BinanceWallet {
    * @return {Promise} The account balances.
    * @prop account The accounts for given credentials.
    * @prop account.balance The balance of the account.
+   * @prop data.asset The currency.
+   * @prop data.free The amount.
    */
   static _getBalanceForCredential(credential) {
     return new Promise((resolve, reject) => {

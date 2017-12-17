@@ -1,3 +1,4 @@
+// noinspection NpmUsedModulesInstalled
 import request from 'request-promise'
 import Coin from './Coin'
 
@@ -7,7 +8,7 @@ let totalMarketCapUsd
 export default class Coinmarket {
   /**
    * Returns the total market cap in USD.
-   * @return {Promise.<float>} The total market cap as float.
+   * @return {Promise} The total market cap as float.
    * @prop result.total_market_cap_usd The total market cap in USD.
    */
   static _getTotalMarketCapUsd() {

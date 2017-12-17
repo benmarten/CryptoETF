@@ -5,6 +5,7 @@ const settings = require('../../settings.json')
 
 export default class Coin {
   symbol
+  // noinspection JSCheckFunctionSignatures
   amount = parseFloat(0)
   rank
   exchanges = {}

@@ -51,7 +51,7 @@ describe('Testing Portfolio', () => {
     await Coinmarket.init()
     await Portfolio.addCoin(new Coin('BTC', 1.37))
     await Portfolio.addCoin(new Coin('ETH', 10))
-    Portfolio.addMissingCoins(5)
+    Portfolio.addMissingCoins(5).then()
     let result = Portfolio.getOutput()
     console.log(result)
     assert(result)

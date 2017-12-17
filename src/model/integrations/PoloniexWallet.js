@@ -1,5 +1,6 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
+// noinspection NpmUsedModulesInstalled
 import Poloniex from 'poloniex-api-node'
 
 const settings = require('../../../settings.json')

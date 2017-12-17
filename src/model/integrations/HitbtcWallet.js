@@ -1,4 +1,5 @@
 import PromiseUtils from '../../PromiseUtils'
+// noinspection NpmUsedModulesInstalled
 import request from 'requestretry'
 import Coin from './../Coin'
 
@@ -15,9 +16,11 @@ export default class HitbtcWallet {
    * @return {Promise} The account balances.
    * @prop account The accounts for given credentials.
    * @prop account.balance The balance of the account.
+   * @prop response.statusCode The status code of the request.
    */
   static _getBalanceForCredential(credential) {
     return new Promise((resolve, reject) => {
+          // noinspection JSCheckFunctionSignatures
           let apiKeyBase64 = new Buffer(`${credential.apiKey}:${credential.apiSecret}`).toString('base64')
           let options = {
             url: 'https://api.hitbtc.com/api/2/account/balance',
@@ -26,7 +29,7 @@ export default class HitbtcWallet {
               'Authorization': `Basic ${apiKeyBase64}`
             },
             maxAttempts: 10,   // (default) try 5 times
-            retryDelay: 5000,  // (default) wait for 5s before trying again
+            retryDelay: 5000  // (default) wait for 5s before trying again
           }
 
           request(options, (error, response, body) => {

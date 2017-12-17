@@ -1,6 +1,7 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
 
+// noinspection NpmUsedModulesInstalled
 const Coinbase = require('coinbase').Client
 const settings = require('../../../settings.json')
 

@@ -1,5 +1,6 @@
 import Utils from './../Utils'
 import Coinmarket from './Coinmarket'
+// noinspection NpmUsedModulesInstalled
 import {table} from 'table'
 import Format from './../Format'
 
@@ -108,6 +109,10 @@ export default class Portfolio {
     }
   }
 
+  /**
+   * Formats the output for the command line.
+   * @return {string} A string with the result.
+   */
   static getOutput() {
     let stretchFactor = Portfolio.getStretchFactor()
     let data = [
@@ -116,7 +121,7 @@ export default class Portfolio {
     ]
     let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
     let targetSum = []
-    settings.options.targetValueBtc = settings.options.targetValueUsd / Coinmarket.getBtcUsd()
+    let targetValueBtc = settings.options.targetValueUsd / Coinmarket.getBtcUsd()
     targetSum['allocationActualPct'] = 0
     targetSum['allocationTargetPct'] = 0
     targetSum['targetBtc'] = 0
@@ -128,7 +133,7 @@ export default class Portfolio {
       let coin = portfolio[sortedKeys[index]]
       let allocationActualPct = coin.getRelativeMarketCap()
       let allocationTargetPct = coin.getRelativeMarketCapRecommended() / stretchFactor
-      let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueBtc
+      let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * targetValueBtc
       let targetUsd = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueUsd
       let drift = Math.abs((coin.getUsdValue() - targetUsd) / settings.options.targetValueUsd)
       data.push([
@@ -172,6 +177,7 @@ export default class Portfolio {
       (Math.abs(drift) * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : '',
       ''])
 
+    // noinspection JSUnusedGlobalSymbols
     let config = {
       columns: {
         2: {
