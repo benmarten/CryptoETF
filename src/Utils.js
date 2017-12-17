@@ -27,4 +27,13 @@ export default class Utils {
     let normalizer = Math.pow(10, places)
     return Math.round(num * normalizer) / normalizer
   }
+
+  /**
+   * Capitalize the first Char, rest lower case.
+   * @param string The input string
+   * @return {string} The result string.
+   */
+  static capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+  }
 }

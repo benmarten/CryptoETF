@@ -11,11 +11,30 @@
         "apiKey": "",
         "apiSecret": ""
       }
+    ],
+    "bittrex": [
+      {
+        "apikey": "",
+        "apisecret": ""
+      }
+    ],
+    "binance": [
+      {
+        "key": "",
+        "secret": ""
+      }
+    ],
+    "hitbtc": [
+      {
+        "apiKey": "",
+        "apiSecret": ""
+      }
     ]
   },
   "symbolMapping": {
     "USD": "USDT",
-    "STR": "XLM"
+    "STR": "XLM",
+    "IOTA": "MIOTA"
   },
   "otherHoldings": [
     {
@@ -26,6 +45,8 @@
     }
   ],
   "options": {
-    "rebalanceDeltaPct": 1.0
+    "targetValueUsd": 50000,
+    "rebalanceDeltaPct": 1.0,
+    "minValueBtc": 0.0001
   }
 }

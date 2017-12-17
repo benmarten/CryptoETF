@@ -1,5 +1,6 @@
 import Utils from './../Utils'
 import Coinmarket from './Coinmarket'
+// noinspection NpmUsedModulesInstalled
 import {table} from 'table'
 import Format from './../Format'
 
@@ -19,9 +20,25 @@ export default class Portfolio {
 
   static addCoin(coin) {
     if (portfolio[coin.getSymbol()]) {
-      portfolio[coin.getSymbol()].addAmount(coin.getAmount())
+      let existingCoin = portfolio[coin.getSymbol()]
+      existingCoin.addAmount(coin.getAmount())
+      if (coin.getAmount() > 0) {
+        existingCoin.addExchange(coin.getExchanges())
+      } else {
+        existingCoin.addExchangePossible(coin.getExchanges())
+      }
     } else {
       portfolio[coin.getSymbol()] = coin
+      this.updateHighestRankWithBalance(coin)
+    }
+  }
+
+  /**
+   * Records the highest rank, that a coin with > 0 value is at.
+   * @param coin The coin
+   */
+  static updateHighestRankWithBalance(coin) {
+    if (coin.getBtcValue() > settings.options.minValueBtc && coin.getRank() >= 0) {
       highestRank = (coin.getRank() > highestRank) ? coin.getRank() : highestRank
     }
   }
@@ -79,15 +96,32 @@ export default class Portfolio {
     return totalPortfolioPct
   }
 
+  static trim() {
+    let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
+    for (let index in sortedKeys) {
+      if (!sortedKeys.hasOwnProperty(index)) {
+        continue
+      }
+      let coin = portfolio[sortedKeys[index]]
+      if (coin.getRank() > highestRank) {
+        delete portfolio[coin.getSymbol()]
+      }
+    }
+  }
+
+  /**
+   * Formats the output for the command line.
+   * @return {string} A string with the result.
+   */
   static getOutput() {
     let stretchFactor = Portfolio.getStretchFactor()
     let data = [
-      ['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'TARGET', 'TARGET', 'BUY/SELL', 'BUY/SELL', 'DRIFT', 'REBALANCE'],
-      ['', '', '', '฿', '$', 'actual %', 'target %', '฿', '$', '฿', '$', '%', '']
+      ['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'TARGET', 'TARGET', 'BUY/SELL', 'BUY/SELL', 'BUY/SELL', 'DRIFT', 'REBALANCE', 'EXCHANGES'],
+      ['', '', '', '฿', '$', 'actual %', 'target %', '฿', '$', '฿', 'ETH', '$', '%', '', '']
     ]
     let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
     let targetSum = []
-    settings.options.targetValueBtc = settings.options.targetValueUsd / Coinmarket.getBtcUsd()
+    let targetValueBtc = settings.options.targetValueUsd / Coinmarket.getBtcUsd()
     targetSum['allocationActualPct'] = 0
     targetSum['allocationTargetPct'] = 0
     targetSum['targetBtc'] = 0
@@ -99,7 +133,7 @@ export default class Portfolio {
       let coin = portfolio[sortedKeys[index]]
       let allocationActualPct = coin.getRelativeMarketCap()
       let allocationTargetPct = coin.getRelativeMarketCapRecommended() / stretchFactor
-      let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueBtc
+      let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * targetValueBtc
       let targetUsd = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueUsd
       let drift = Math.abs((coin.getUsdValue() - targetUsd) / settings.options.targetValueUsd)
       data.push([
@@ -112,10 +146,12 @@ export default class Portfolio {
         Format.percent(allocationTargetPct),
         Format.bitcoin(targetBtc),
         Format.money(targetUsd),
-        targetBtc - coin.getBtcValue(),
+        Format.bitcoin(targetBtc - coin.getBtcValue(), 8),
+        Format.bitcoin((targetBtc - coin.getBtcValue()) / Coinmarket.getBtcEth(), 8),
         Format.money(targetUsd - coin.getUsdValue()),
         Format.percent(drift),
-        (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : ''
+        (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : '',
+        coin.getExchangesString()
       ])
       targetSum['allocationActualPct'] += allocationActualPct || 0
       targetSum['allocationTargetPct'] += allocationTargetPct || 0
@@ -135,9 +171,13 @@ export default class Portfolio {
       Format.bitcoin(targetSum['targetBtc']),
       Format.money(targetSum['targetUsd']),
       Format.bitcoin(targetSum['targetBtc'] - this.getSumBtc()),
+      '',
       Format.money(targetSum['targetUsd'] - this.getSumUsd()),
       Format.percent(drift),
-      (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : ''])
+      (Math.abs(drift) * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : '',
+      ''])
+
+    // noinspection JSUnusedGlobalSymbols
     let config = {
       columns: {
         2: {
@@ -167,7 +207,13 @@ export default class Portfolio {
         10: {
           alignment: 'right'
         },
+        11: {
+          alignment: 'right'
+        },
         12: {
+          alignment: 'right'
+        },
+        13: {
           alignment: 'right'
         }
       },
