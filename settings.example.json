@@ -29,6 +29,12 @@
         "apiKey": "",
         "apiSecret": ""
       }
+    ],
+    "bitfinex": [
+      {
+        "apiKey": "",
+        "apiSecret": ""
+      }
     ]
   },
   "symbolMapping": {
