@@ -37,7 +37,9 @@ async function refreshPortfolio() {
             }
           }
 
-          await Portfolio.addMissingCoins()
+          if (!settings.options.hideMissingCoins) {
+            await Portfolio.addMissingCoins()
+          }
           Portfolio.trim()
 
           Portfolio.removeCoin('USDT')
