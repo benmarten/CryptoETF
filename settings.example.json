@@ -35,12 +35,19 @@
         "apiKey": "",
         "apiSecret": ""
       }
+    ],
+    "kraken": [
+      {
+        "apiKey": "",
+        "apiSecret": ""
+      }
     ]
   },
   "symbolMapping": {
     "USD": "USDT",
     "STR": "XLM",
-    "IOTA": "MIOTA"
+    "IOTA": "MIOTA",
+    "XBT": "BTC"
   },
   "otherHoldings": [
     {
