@@ -20,6 +20,7 @@ Edit settings.json with your exchange api keys, then:
 ## Exchanges
 CryptoETF has API integrations with the following exchanges:
 - Coinbase. Join Here: https://www.coinbase.com/join/587ab088801bae035cad02c5
+- GDAX. Join Here: https://www.gdax.com/
 - Poloniex. Join Here: https://www.poloniex.com
 - Bittrex. Join Here: https://www.bittrex.com
 - Binance. Join Here: https://www.binance.com/?ref=12278261

@@ -12,6 +12,13 @@
         "apiSecret": ""
       }
     ],
+	"gdax": [
+      {
+        "apiKey": "",
+        "apiSecret": "",
+        "password": ""
+      }
+    ],
     "bittrex": [
       {
         "apikey": "",
