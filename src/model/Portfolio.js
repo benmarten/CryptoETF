@@ -223,4 +223,8 @@ export default class Portfolio {
     }
     return table(data, config)
   }
+
+  static getJson() {
+    return JSON.stringify(portfolio, null, 2);
+  }
 }
