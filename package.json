@@ -4,6 +4,8 @@
     "binance": "^1.1.0",
     "bitfinex": "^1.0.3",
     "coinbase": "^2.0.6",
+    "gdax": "^0.4.2",
+    "kraken-api": "^1.0.0",
     "node-bittrex-api": "^0.8.1",
     "poloniex-api-node": "^1.6.5",
     "request-promise": "^4.2.2",
