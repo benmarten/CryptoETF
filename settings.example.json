@@ -1,54 +1,38 @@
 {
   "accounts": {
-    "poloniex": [
-      {
-        "apiKey": "",
-        "apiSecret": ""
-      }
-    ],
-    "coinbase": [
-      {
-        "apiKey": "",
-        "apiSecret": ""
-      }
-    ],
-	"gdax": [
-      {
-        "apiKey": "",
-        "apiSecret": "",
-        "password": ""
-      }
-    ],
-    "bittrex": [
-      {
-        "apikey": "",
-        "apisecret": ""
-      }
-    ],
-    "binance": [
-      {
-        "key": "",
-        "secret": ""
-      }
-    ],
-    "hitbtc": [
-      {
-        "apiKey": "",
-        "apiSecret": ""
-      }
-    ],
-    "bitfinex": [
-      {
-        "apiKey": "",
-        "apiSecret": ""
-      }
-    ],
-    "kraken": [
-      {
-        "apiKey": "",
-        "apiSecret": ""
-      }
-    ]
+    "poloniex": [{
+      "apiKey": "",
+      "apiSecret": ""
+    }],
+    "coinbase": [{
+      "apiKey": "",
+      "apiSecret": ""
+    }],
+    "gdax": [{
+      "apiKey": "",
+      "apiSecret": "",
+      "password": ""
+    }],
+    "bittrex": [{
+      "apikey": "",
+      "apisecret": ""
+    }],
+    "binance": [{
+      "key": "",
+      "secret": ""
+    }],
+    "hitbtc": [{
+      "apiKey": "",
+      "apiSecret": ""
+    }],
+    "bitfinex": [{
+      "apiKey": "",
+      "apiSecret": ""
+    }],
+    "kraken": [{
+      "apiKey": "",
+      "apiSecret": ""
+    }]
   },
   "symbolMapping": {
     "USD": "USDT",
@@ -56,14 +40,11 @@
     "IOTA": "MIOTA",
     "XBT": "BTC"
   },
-  "otherHoldings": [
-    {
-      "BCH": 1.0
-    },
-    {
-      "BTG": 1.0
-    }
-  ],
+  "otherHoldings": [{
+    "BCH": 1.0
+  }, {
+    "BTG": 1.0
+  }],
   "options": {
     "targetValueUsd": 50000,
     "rebalanceDeltaPct": 1.0,
