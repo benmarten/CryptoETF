@@ -1,5 +1,24 @@
 <a name=""></a>
-#  (2017-12-17)
+#  1.4.0
+
+
+### Features
+
+* adds option to hide missing coins ([3fd1b9c](https://github.com/benmarten/CryptoETF/commit/3fd1b9c))
+* save output to file ([0de2b1f](https://github.com/benmarten/CryptoETF/commit/0de2b1f))
+* **integration:** adds GDAX integration ([#10](https://github.com/benmarten/CryptoETF/issues/10)) ([e91975a](https://github.com/benmarten/CryptoETF/commit/e91975a))
+* **integration:** adds Kraken integration ([#7](https://github.com/benmarten/CryptoETF/issues/7)) ([7e1ba78](https://github.com/benmarten/CryptoETF/commit/7e1ba78))
+
+<a name=""></a>
+#  1.3.1
+
+
+### Features
+
+* Adds Bitfinex support
+
+<a name=""></a>
+#  1.3.0
 
 
 ### Bug Fixes
