@@ -43,6 +43,12 @@
         "apiSecret": ""
       }
     ],
+    "bitgrail": [
+      {
+        "apiKey": "",
+        "apiSecret": ""
+      }
+    ],
     "kraken": [
       {
         "apiKey": "",
