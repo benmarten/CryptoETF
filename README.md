@@ -31,6 +31,18 @@ CryptoETF has API integrations with the following exchanges:
 
 With these exchanges, you can easily build yourself your own CryptoETF.
 
+## Settings
+The tool expects your settings in settings.json. Take a look at settings.example.json for a starting point.
+- *accounts*: Under accounts, fill in your api credentials for the exchange that you want to use. Delete the exchanges that you do not need.
+- *symbolMapping*: Some exchanges use different symbols that coinmarketcap.com. Hence here you can map the symbols, e.g.: map MIOTA to IOTA.
+- *otherHoldings*: A place to manually add some of your holdings. Notation is key: Symbol, value is amount of native currency.
+- *options*: These are specific options for the tool:
+  - targetValueUsd: The target value for your ETF; A general rule of thumb is to keep your crypto at a certain percentage of your overall investment portfolio. This could be 5, 10, 20 or more percent, depending on your risk tolerance.
+  - rebalanceDeltaPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing is recommended.
+  - minValueBtc: Ignore coins that only have a holdingsvalue under a certain bitcoin value.
+  - hideMissingCoins: By default CryptoETF will add all missing coins up to your last coin holding by rank of the coin (global market cap). This option disables that behaviour.
+- *outputFile*: Path to a file to forward the output to as json.
+
 ## Test
 `npm test`
 
