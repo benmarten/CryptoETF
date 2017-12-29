@@ -32,6 +32,10 @@
     "kraken": [{
       "apiKey": "",
       "apiSecret": ""
+    }],
+    "bitgrail": [{
+        "apiKey": "",
+        "apiSecret": ""
     }]
   },
   "symbolMapping": {
