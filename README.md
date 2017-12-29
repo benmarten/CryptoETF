@@ -27,6 +27,7 @@ CryptoETF has API integrations with the following exchanges:
 - HitBTC. Join Here: https://hitbtc.com/?ref_id=5a3596f643b9e
 - Bitfinex. Join Here: https://www.bitfinex.com
 - Kraken. Join Here: https://www.kraken.com
+- Bitgrail. Join Here: https://bitgrail.com
 
 With these exchanges, you can easily build yourself your own CryptoETF.
 
