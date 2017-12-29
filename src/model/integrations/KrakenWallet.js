@@ -18,6 +18,7 @@ export default class KrakenWallet {
   static _getBalanceForCredential(credential) {
     return new Promise((resolve, reject) => {
           const kraken = new KrakenClient(credential.apiKey, credential.apiSecret, {timeout: 10000})
+          // noinspection JSCheckFunctionSignatures
           kraken.api('Balance', function(err, data) {
             if (err) {
               return reject(err)
