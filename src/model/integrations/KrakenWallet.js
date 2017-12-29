@@ -17,7 +17,7 @@ export default class KrakenWallet {
    */
   static _getBalanceForCredential(credential) {
     return new Promise((resolve, reject) => {
-          const kraken = new KrakenClient(credential.apiKey, credential.apiSecret, {timeout: 10000});
+          const kraken = new KrakenClient(credential.apiKey, credential.apiSecret, {timeout: 10000})
           kraken.api('Balance', function(err, data) {
             if (err) {
               return reject(err)
@@ -27,7 +27,7 @@ export default class KrakenWallet {
             for (let symbol in balances) {
               let amount = balances[symbol]
               if (symbol.length === 4 && symbol[0] === 'X') {
-                symbol = symbol.substr(1,3);
+                symbol = symbol.substr(1, 3)
               }
               result.push(new Coin(symbol, amount, 'Kraken'))
             }

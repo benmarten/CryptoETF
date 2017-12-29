@@ -225,6 +225,6 @@ export default class Portfolio {
   }
 
   static getJson() {
-    return JSON.stringify(portfolio, null, 2);
+    return JSON.stringify(portfolio, null, 2)
   }
 }

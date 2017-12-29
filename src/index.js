@@ -2,7 +2,7 @@ import Portfolio from './model/Portfolio'
 import Coinmarket from './model/Coinmarket'
 import Coin from './model/Coin'
 import Utils from './Utils'
-import fs from 'fs';
+import fs from 'fs'
 
 const settings = require('../settings.json')
 
@@ -46,10 +46,10 @@ async function refreshPortfolio() {
           Portfolio.removeCoin('USDT')
 
           if (settings.outputFile) {
-            fs.writeFile(settings.outputFile, Portfolio.getJson(), 'utf8', function(err){
-              if (err) throw err;
+            fs.writeFile(settings.outputFile, Portfolio.getJson(), 'utf8', function(err) {
+              if (err) throw err
               console.log(`Saved data to ${settings.outputFile}...`)
-            });
+            })
           }
 
 
