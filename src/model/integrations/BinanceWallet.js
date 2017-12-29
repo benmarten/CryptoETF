@@ -1,7 +1,7 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
-import Binance from 'Binance'
+import Binance from 'binance'
 
 const settings = require('../../../settings.json')
 
