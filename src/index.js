@@ -11,7 +11,7 @@ async function refreshPortfolio() {
         try {
           await Coinmarket.init()
           let integrations = {}
-
+          let accountsFinished = 0
           for (let account in settings.accounts) {
             let name = Utils.capitalize(account)
             try {
@@ -23,12 +23,18 @@ async function refreshPortfolio() {
             try {
               if (settings.accounts[account] && settings.accounts[account].length > 0) {
                 console.log(`Retrieving ${name} balance...`)
-                let coins = await integrations[name].default.getBalance()
-                await Portfolio.addCoins(coins)
+                integrations[name].default.getBalance().then((coins) => {
+                  Portfolio.addCoins(coins)
+                  accountsFinished++
+                })
               }
             } catch (e) {
               console.log(`Error: An error occured while running integration: ${name}, ${e}`)
             }
+          }
+
+          while (accountsFinished !== Object.keys(settings.accounts).length) {
+            await Utils.sleep(100)
           }
 
           for (let index in settings.otherHoldings) {

@@ -36,4 +36,13 @@ export default class Utils {
   static capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
   }
+
+  /**
+   * Sleep for a given time, non-blocking.
+   * @param ms Milliseconds to sleep.
+   * @return {Promise<any>}
+   */
+  static sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
 }
