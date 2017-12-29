@@ -1,4 +1,19 @@
 <a name=""></a>
+#  1.5.0
+
+
+### Bug Fixes
+
+* **integrations:** fix binance module typo ([#12](https://github.com/benmarten/CryptoETF/issues/12)) ([e6e75ca](https://github.com/benmarten/CryptoETF/commit/e6e75ca))
+
+
+### Features
+
+* **integration:** implement Bitgrail API ([#11](https://github.com/benmarten/CryptoETF/issues/11)) ([e31c2f2](https://github.com/benmarten/CryptoETF/commit/e31c2f2))
+
+
+
+<a name=""></a>
 #  1.4.0
 
 
@@ -6,7 +21,7 @@
 
 * adds option to hide missing coins ([3fd1b9c](https://github.com/benmarten/CryptoETF/commit/3fd1b9c))
 * save output to file ([0de2b1f](https://github.com/benmarten/CryptoETF/commit/0de2b1f))
-* **integration:** adds GDAX integration ([#10](https://github.com/benmarten/CryptoETF/issues/10)) ([e91975a](https://github.com/benmarten/CryptoETF/commit/e91975a))
+* **integration:** add GDAX integration ([#10](https://github.com/benmarten/CryptoETF/issues/10)) ([e91975a](https://github.com/benmarten/CryptoETF/commit/e91975a))
 * **integration:** adds Kraken integration ([#7](https://github.com/benmarten/CryptoETF/issues/7)) ([7e1ba78](https://github.com/benmarten/CryptoETF/commit/7e1ba78))
 
 <a name=""></a>
