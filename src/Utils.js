@@ -1,3 +1,5 @@
+const settings = require('../settings.json')
+
 export default class Utils {
   static pad(width, string, padding) {
     return (width <= string.length) ? string : this.pad(width, padding + string, padding)
@@ -35,5 +37,15 @@ export default class Utils {
    */
   static capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+  }
+
+  /**
+   * Determines if drift is above treshold defined in settings.
+   * @param drift The current drift.
+   * @return {string} 'Y', if drifted, '' if not.
+   */
+  static hasDriftedAboveTreshold(drift) {
+    return (Math.abs(drift) * 100 > (settings.options.rebalanceDeltaTotalPct ||
+        settings.options.rebalanceDeltaPct)) ? 'Y' : ''
   }
 }

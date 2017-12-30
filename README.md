@@ -38,7 +38,10 @@ The tool expects your settings in settings.json. Take a look at settings.example
 - *otherHoldings*: A place to manually add some of your holdings. Notation is key: Symbol, value is amount of native currency.
 - *options*: These are specific options for the tool:
   - targetValueUsd: The target value for your ETF; A general rule of thumb is to keep your crypto at a certain percentage of your overall investment portfolio. This could be 5, 10, 20 or more percent, depending on your risk tolerance.
-  - rebalanceDeltaPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing is recommended.
+    - Default [false]: Use current portfolio value as target value.
+    - Number [1 - 999999999999]: Use fixed number as target value.
+  - rebalanceDeltaTotalPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing of total portfolio is recommended.
+  - rebalanceDeltaPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing of individual position is recommended.
   - minValueBtc: Ignore coins that only have a holdingsvalue under a certain bitcoin value.
   - hideMissingCoins: By default CryptoETF will add all missing coins up to your last coin holding by rank of the coin (global market cap). This option disables that behaviour.
 - *outputFile*: Path to a file to forward the output to as json.

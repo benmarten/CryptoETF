@@ -110,6 +110,18 @@ export default class Portfolio {
   }
 
   /**
+   * Returns the target value of the portfolio in USD.
+   * @return {*} The target value in USD.
+   */
+  static getTargetValueUsd() {
+    if (!settings.options.targetValueUsd) {
+      return Portfolio.getSumUsd()
+    } else {
+      return settings.options.targetValueUsd
+    }
+  }
+
+  /**
    * Formats the output for the command line.
    * @return {string} A string with the result.
    */
@@ -121,7 +133,8 @@ export default class Portfolio {
     ]
     let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
     let targetSum = []
-    let targetValueBtc = settings.options.targetValueUsd / Coinmarket.getBtcUsd()
+    let targetValueUsd = this.getTargetValueUsd()
+    let targetValueBtc = this.getTargetValueUsd() / Coinmarket.getBtcUsd()
     targetSum['allocationActualPct'] = 0
     targetSum['allocationTargetPct'] = 0
     targetSum['targetBtc'] = 0
@@ -134,8 +147,8 @@ export default class Portfolio {
       let allocationActualPct = coin.getRelativeMarketCap()
       let allocationTargetPct = coin.getRelativeMarketCapRecommended() / stretchFactor
       let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * targetValueBtc
-      let targetUsd = coin.getRelativeMarketCapRecommended() / stretchFactor * settings.options.targetValueUsd
-      let drift = Math.abs((coin.getUsdValue() - targetUsd) / settings.options.targetValueUsd)
+      let targetUsd = coin.getRelativeMarketCapRecommended() / stretchFactor * targetValueUsd
+      let drift = Math.abs((coin.getUsdValue() - targetUsd) / targetValueUsd)
       data.push([
         coin.getRank(),
         coin.getSymbol(),
@@ -150,7 +163,7 @@ export default class Portfolio {
         Format.bitcoin((targetBtc - coin.getBtcValue()) / Coinmarket.getBtcEth(), 8),
         Format.money(targetUsd - coin.getUsdValue()),
         Format.percent(drift),
-        (drift * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : '',
+        Utils.hasDriftedAboveTreshold(drift),
         coin.getExchangesString()
       ])
       targetSum['allocationActualPct'] += allocationActualPct || 0
@@ -174,7 +187,7 @@ export default class Portfolio {
       '',
       Format.money(targetSum['targetUsd'] - this.getSumUsd()),
       Format.percent(drift),
-      (Math.abs(drift) * 100 > settings.options.rebalanceDeltaPct) ? 'Y' : '',
+      Utils.hasDriftedAboveTreshold(drift),
       ''])
 
     // noinspection JSUnusedGlobalSymbols
