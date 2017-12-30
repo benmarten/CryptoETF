@@ -1,0 +1,24 @@
+{
+  "accounts": {},
+  "symbolMapping": {
+    "USD": "USDT",
+    "STR": "XLM",
+    "IOTA": "MIOTA",
+    "XBT": "BTC"
+  },
+  "otherHoldings": [{
+    "BCH": 1.0
+  }, {
+    "ETH": 1.0
+  }, {
+    "XRP": 1.0
+  }],
+  "options": {
+    "targetValueUsd": false,
+    "rebalanceDeltaPct": 1.0,
+    "rebalanceDeltaTotalPct": 10.0,
+    "minValueBtc": 0.0001,
+    "hideMissingCoins": false
+  },
+  "outputFile": false
+}
