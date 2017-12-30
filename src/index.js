@@ -9,6 +9,7 @@ const settings = require('../settings.json')
 async function refreshPortfolio() {
   return new Promise(async (resolve) => {
         try {
+          Portfolio.clear()
           await Coinmarket.init()
           let integrations = {}
           let promises = [];
