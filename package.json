@@ -27,6 +27,6 @@
   },
   "scripts": {
     "build": "npx babel src --out-dir dist",
-    "test": "nyc mocha --require babel-core/register test/**/*.js test/**/**/*.js"
+    "test": "cp settings.test.json settings.json && ./node_modules/.bin/nyc mocha --require babel-core/register test/**/*.js test/**/**/*.js"
   }
 }
