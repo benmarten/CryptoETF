@@ -50,8 +50,9 @@
     "BTG": 1.0
   }],
   "options": {
-    "targetValueUsd": 50000,
+    "targetValueUsd": false,
     "rebalanceDeltaPct": 1.0,
+    "rebalanceDeltaTotalPct": 10.0,
     "minValueBtc": 0.0001,
     "hideMissingCoins": false
   },
