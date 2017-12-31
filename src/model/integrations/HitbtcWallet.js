@@ -2,12 +2,11 @@ import PromiseUtils from '../../PromiseUtils'
 // noinspection NpmUsedModulesInstalled
 import request from 'requestretry'
 import Coin from './../Coin'
-
-const settings = require('../../../settings.json')
+import * as Settings from './../../Settings'
 
 export default class HitbtcWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.hitbtc, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.hitbtc, this._getBalanceForCredential)
   }
 
   /**

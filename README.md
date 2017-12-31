@@ -47,7 +47,8 @@ The tool expects your settings in settings.json. Take a look at settings.example
 - *outputFile*: Path to a file to forward the output to as json.
 
 ## Test
-`npm test`
+- `npm test` To run all the unit tests, without the integrations, which require api keys.
+- `npm testLocal` To run all the unit tests, with the integrations, which require you to set all api keys in settings.json.
 
 ## Contributing
 1. Fork it!

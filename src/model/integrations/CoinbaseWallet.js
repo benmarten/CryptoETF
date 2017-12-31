@@ -1,13 +1,12 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
-
+import * as Settings from './../../Settings'
 // noinspection NpmUsedModulesInstalled
 const Coinbase = require('coinbase').Client
-const settings = require('../../../settings.json')
 
 export default class CoinbaseWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.coinbase, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.coinbase, this._getBalanceForCredential)
   }
 
   /**

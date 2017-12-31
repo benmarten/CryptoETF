@@ -2,12 +2,11 @@ import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Poloniex from 'poloniex-api-node'
-
-const settings = require('../../../settings.json')
+import * as Settings from './../../Settings'
 
 export default class PoloniexWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.poloniex, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.poloniex, this._getBalanceForCredential)
   }
 
   /**

@@ -1,13 +1,15 @@
 import BitfinexWallet from '../../../src/model/integrations/BitfinexWallet'
 import assert from 'assert'
 
-const settings = require('../../../settings.json')
+import * as Settings from './../../../src/Settings'
 
 describe('Testing Bitfinex integration', () => {
-  it('Testing initial connection and balances', async () => {
-    if (!settings.accounts.bitfinex) {
-      return
+  before(function() {
+    if (!Settings.accounts.binance) {
+      this.skip()
     }
+  })
+  it('Testing initial connection and balances', async () => {
     let wallet = await BitfinexWallet.getBalance()
     assert(wallet.length > 0)
   })

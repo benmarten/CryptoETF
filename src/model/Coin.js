@@ -1,7 +1,6 @@
 import Coinmarket from './Coinmarket'
 import Portfolio from './Portfolio'
-
-const settings = require('../../settings.json')
+import * as Settings from './../Settings'
 
 export default class Coin {
   symbol
@@ -15,8 +14,8 @@ export default class Coin {
     if (!symbol || (!amount && amount !== 0)) {
       throw new Error('Empty constructor data provided for coin.')
     }
-    if (settings.symbolMapping[symbol]) {
-      symbol = settings.symbolMapping[symbol]
+    if (Settings.symbolMapping[symbol]) {
+      symbol = Settings.symbolMapping[symbol]
     }
 
     this.symbol = symbol

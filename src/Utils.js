@@ -1,4 +1,4 @@
-const settings = require('../settings.json')
+import * as Settings from './Settings'
 
 export default class Utils {
   static pad(width, string, padding) {
@@ -45,7 +45,7 @@ export default class Utils {
    * @return {string} 'Y', if drifted, '' if not.
    */
   static hasDriftedAboveTreshold(drift) {
-    return (Math.abs(drift) * 100 > (settings.options.rebalanceDeltaTotalPct ||
-        settings.options.rebalanceDeltaPct)) ? 'Y' : ''
+    return (Math.abs(drift) * 100 > (Settings.options.rebalanceDeltaTotalPct ||
+        Settings.options.rebalanceDeltaPct)) ? 'Y' : ''
   }
 }

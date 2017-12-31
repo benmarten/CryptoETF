@@ -1,13 +1,15 @@
 import PoloniexWallet from '../../../src/model/integrations/PoloniexWallet'
 import assert from 'assert'
 
-const settings = require('../../../settings.json')
+import * as Settings from './../../../src/Settings'
 
 describe('Testing Poloniex integration', () => {
-  it('Testing initial connection and balances', async () => {
-    if (!settings.accounts.poloniex) {
-      return
+  before(function() {
+    if (!Settings.accounts.binance) {
+      this.skip()
     }
+  })
+  it('Testing initial connection and balances', async () => {
     let wallet = await PoloniexWallet.getBalance()
     assert(wallet.length > 0)
   })
