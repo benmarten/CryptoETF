@@ -34,6 +34,10 @@ export default class BitgrailWallet {
           }
           return request(options)
               .then(data => {
+                if (!data.success) {
+                  reject('Bitgrail Error: ' + JSON.stringify(data.response))
+                  return
+                }
                 let result = []
                 let balances = data.response
                 for (let symbol in balances) {
