@@ -4,12 +4,11 @@ import Coin from '../Coin'
 import request from 'request-promise'
 import crypto from 'crypto'
 import querystring from 'querystring'
-
-const settings = require('../../../settings.json')
+import * as Settings from './../../Settings'
 
 export default class BitgrailWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.bitgrail, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.bitgrail, this._getBalanceForCredential)
   }
 
   /**

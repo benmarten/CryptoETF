@@ -3,8 +3,7 @@ import Coinmarket from './Coinmarket'
 // noinspection NpmUsedModulesInstalled
 import {table} from 'table'
 import Format from './../Format'
-
-const settings = require('./../../settings.json')
+import * as Settings from './../Settings'
 
 let portfolio = {}
 let highestRank = 0
@@ -38,7 +37,7 @@ export default class Portfolio {
    * @param coin The coin
    */
   static updateHighestRankWithBalance(coin) {
-    if (coin.getBtcValue() > settings.options.minValueBtc && coin.getRank() >= 0) {
+    if (coin.getBtcValue() > Settings.options.minValueBtc && coin.getRank() >= 0) {
       highestRank = (coin.getRank() > highestRank) ? coin.getRank() : highestRank
     }
   }
@@ -114,10 +113,10 @@ export default class Portfolio {
    * @return {*} The target value in USD.
    */
   static getTargetValueUsd() {
-    if (!settings.options.targetValueUsd) {
+    if (!Settings.options.targetValueUsd) {
       return Portfolio.getSumUsd()
     } else {
-      return settings.options.targetValueUsd
+      return Settings.options.targetValueUsd
     }
   }
 

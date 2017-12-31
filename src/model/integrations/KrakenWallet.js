@@ -2,12 +2,11 @@ import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import KrakenClient from 'kraken-api'
-
-const settings = require('../../../settings.json')
+import * as Settings from './../../Settings'
 
 export default class KrakenWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.kraken, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.kraken, this._getBalanceForCredential)
   }
 
   /**

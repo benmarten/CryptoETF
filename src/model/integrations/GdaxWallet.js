@@ -1,13 +1,12 @@
 import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
-
+import * as Settings from './../../Settings'
 // noinspection NpmUsedModulesInstalled
 const Gdax = require('gdax').AuthenticatedClient
-const settings = require('../../../settings.json')
 
 export default class GdaxWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.gdax, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.gdax, this._getBalanceForCredential)
   }
 
   /**

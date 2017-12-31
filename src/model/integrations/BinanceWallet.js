@@ -3,11 +3,11 @@ import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Binance from 'binance'
 
-const settings = require('../../../settings.json')
+import * as Settings from './../../Settings'
 
 export default class BinanceWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.binance, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.binance, this._getBalanceForCredential)
   }
 
   /**
