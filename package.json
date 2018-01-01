@@ -26,7 +26,10 @@
     "nyc": "^11.3.0"
   },
   "scripts": {
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "build": "npx babel src --out-dir dist",
-    "test": "nyc mocha --require babel-core/register test/**/*.js test/**/**/*.js"
-  }
+    "testLocal": "./node_modules/.bin/nyc mocha --require babel-core/register test/**/*.js test/**/**/*.js",
+    "test": "NODE_ENV=test npm run testLocal"
+  },
+  "version": "1.5.1"
 }

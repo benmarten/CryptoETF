@@ -45,6 +45,7 @@ export default class Coinmarket {
    * @prop coin.market_cap_usd The market cap for the given coin in USD.
    */
   static init() {
+    console.log('Retrieving coinmarketcap statistics...')
     return this._getTotalMarketCapUsd().then(_totalMarketCapUsd => {
       totalMarketCapUsd = _totalMarketCapUsd
       return this._getCoinStats().then(coinsRefreshed => {

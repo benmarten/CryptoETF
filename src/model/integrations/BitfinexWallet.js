@@ -2,12 +2,11 @@ import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Bitfinex from 'bitfinex'
-
-const settings = require('../../../settings.json')
+import * as Settings from './../../Settings'
 
 export default class BitfinexWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.bitfinex, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.bitfinex, this._getBalanceForCredential)
   }
 
   /**

@@ -3,16 +3,17 @@ import Coinmarket from './model/Coinmarket'
 import Coin from './model/Coin'
 import Utils from './Utils'
 import fs from 'fs'
-
-const settings = require('../settings.json')
+import * as Settings from './Settings'
 
 async function refreshPortfolio() {
   return new Promise(async (resolve) => {
         try {
+          Portfolio.clear()
           await Coinmarket.init()
           let integrations = {}
+          let promises = []
 
-          for (let account in settings.accounts) {
+          for (let account in Settings.accounts) {
             let name = Utils.capitalize(account)
             try {
               integrations[name] = require(`./model/integrations/${name}Wallet`)
@@ -21,34 +22,35 @@ async function refreshPortfolio() {
               continue
             }
             try {
-              if (settings.accounts[account] && settings.accounts[account].length > 0) {
+              if (Settings.accounts[account] && Settings.accounts[account].length > 0) {
                 console.log(`Retrieving ${name} balance...`)
-                let coins = await integrations[name].default.getBalance()
-                await Portfolio.addCoins(coins)
+                promises.push(integrations[name].default.getBalance().then(coins => Portfolio.addCoins(coins)))
               }
             } catch (e) {
               console.log(`Error: An error occured while running integration: ${name}, ${e}`)
             }
           }
 
-          for (let index in settings.otherHoldings) {
-            if (settings.otherHoldings.hasOwnProperty(index)) {
-              let otherHolding = settings.otherHoldings[index]
+          await Promise.all(promises)
+
+          for (let index in Settings.otherHoldings) {
+            if (Settings.otherHoldings.hasOwnProperty(index)) {
+              let otherHolding = Settings.otherHoldings[index]
               Portfolio.addCoin(new Coin(Object.keys(otherHolding)[0], Object.values(otherHolding)[0]))
             }
           }
 
-          if (!settings.options.hideMissingCoins) {
+          if (!Settings.options.hideMissingCoins) {
             await Portfolio.addMissingCoins()
           }
           Portfolio.trim()
 
           Portfolio.removeCoin('USDT')
 
-          if (settings.outputFile) {
-            fs.writeFile(settings.outputFile, Portfolio.getJson(), 'utf8', function(err) {
+          if (Settings.outputFile) {
+            fs.writeFile(Settings.outputFile, Portfolio.getJson(), 'utf8', function(err) {
               if (err) throw err
-              console.log(`Saved data to ${settings.outputFile}...`)
+              console.log(`Saved data to ${Settings.outputFile}...`)
             })
           }
 

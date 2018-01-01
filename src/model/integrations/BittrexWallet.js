@@ -2,12 +2,11 @@ import PromiseUtils from '../../PromiseUtils'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Bittrex from 'node-bittrex-api'
-
-const settings = require('../../../settings.json')
+import * as Settings from './../../Settings'
 
 export default class BittrexWallet {
   static getBalance() {
-    return PromiseUtils.forEachPromise(settings.accounts.bittrex, this._getBalanceForCredential)
+    return PromiseUtils.forEachPromise(Settings.accounts.bittrex, this._getBalanceForCredential)
   }
 
   /**
