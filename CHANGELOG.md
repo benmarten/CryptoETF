@@ -1,3 +1,24 @@
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/benmarten/CryptoETF/compare/1.5.0...1.5.1) (2018-01-01)
+
+
+### Bug Fixes
+
+* **integration/bitgrail:** reject promise on 401 from bitgrail ([9c2b16b](https://github.com/benmarten/CryptoETF/commit/9c2b16b))
+
+
+### Features
+
+* add logging for coinmarketcap statistic retrieval ([d34b8c0](https://github.com/benmarten/CryptoETF/commit/d34b8c0))
+* **settings:** set targetValueUsd to false to use current portfolio value as target; use rebalanceD ([2edab74](https://github.com/benmarten/CryptoETF/commit/2edab74))
+
+
+### Performance Improvements
+
+* **integrations:** retrieve balances in parallel, via Promise.all() ([#15](https://github.com/benmarten/CryptoETF/issues/15)) ([0e3d6c0](https://github.com/benmarten/CryptoETF/commit/0e3d6c0))
+
+
+
 <a name=""></a>
 #  1.5.0
 
