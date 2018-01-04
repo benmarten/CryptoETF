@@ -27,7 +27,7 @@ export default class Coinmarket {
 
   static _getCoinStats() {
     let options = {
-      uri: 'https://api.coinmarketcap.com/v1/ticker/',
+      uri: 'https://api.coinmarketcap.com/v1/ticker/?limit=0',
       json: true
     }
     return request(options)
