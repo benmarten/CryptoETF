@@ -35,7 +35,7 @@ describe('Testing coinmarketcap.com integration', () => {
   it('test getCoins, and limit', async () => {
     await Coinmarket.init()
     let result = await Coinmarket.getCoins()
-    assert(Object.keys(result).length === 100)
+    assert(Object.keys(result).length > 0)
     result = await Coinmarket.getCoins(10)
     assert(Object.keys(result).length === 10)
     result = await Coinmarket.getCoins(1)
