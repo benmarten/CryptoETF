@@ -162,7 +162,7 @@ export default class Portfolio {
         Format.bitcoin((targetBtc - coin.getBtcValue()) / Coinmarket.getBtcEth(), 8),
         Format.money(targetUsd - coin.getUsdValue()),
         Format.percent(drift),
-        Utils.hasDriftedAboveTreshold(drift),
+        Utils.hasDriftedAboveTreshold(drift, Settings.options.rebalanceDeltaPct),
         coin.getExchangesString()
       ])
       targetSum['allocationActualPct'] += allocationActualPct || 0
@@ -186,7 +186,8 @@ export default class Portfolio {
       '',
       Format.money(targetSum['targetUsd'] - this.getSumUsd()),
       Format.percent(drift),
-      Utils.hasDriftedAboveTreshold(drift),
+      Utils.hasDriftedAboveTreshold(drift, (Settings.options.rebalanceDeltaTotalPct ||
+          Settings.options.rebalanceDeltaPct)),
       ''])
 
     // noinspection JSUnusedGlobalSymbols
