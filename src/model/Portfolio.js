@@ -51,7 +51,7 @@ export default class Portfolio {
       for (let index in coins) {
         // noinspection JSUnfilteredForInLoop
         let coin = coins[index]
-        if (coin) {
+        if (coin && (coin.getBtcValue() > Settings.options.minValueBtc)) {
           this.addCoin(coin)
         }
       }
