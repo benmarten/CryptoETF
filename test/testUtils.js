@@ -12,4 +12,9 @@ describe('Testing utils', () => {
     assert(Utils.round(1.5666, 2) === 1.57)
     assert(Utils.round(1.5666, 10) === 1.5666)
   })
+
+  it('Test hasDriftedAboveTreshold', () => {
+    assert(Utils.hasDriftedAboveTreshold(0.11, 10))
+    assert(!Utils.hasDriftedAboveTreshold(0.09, 10))
+  })
 })
