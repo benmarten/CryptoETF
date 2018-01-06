@@ -1,6 +1,8 @@
 // noinspection NpmUsedModulesInstalled
 import request from 'request-promise'
 import Coin from './Coin'
+import * as Settings from './../Settings'
+
 
 let coins = {}
 let totalMarketCapUsd
@@ -45,7 +47,7 @@ export default class Coinmarket {
    * @prop coin.market_cap_usd The market cap for the given coin in USD.
    */
   static init() {
-    console.log('Retrieving coinmarketcap statistics...')
+    console.log('Retrieving Coinmarketcap statistics...')
     return this._getTotalMarketCapUsd().then(_totalMarketCapUsd => {
       totalMarketCapUsd = _totalMarketCapUsd
       return this._getCoinStats().then(coinsRefreshed => {
@@ -54,6 +56,7 @@ export default class Coinmarket {
           let coin = coinsRefreshed[i]
           if (coin) {
             coin['market_cap_pct'] = coin.market_cap_usd / totalMarketCapUsd
+            this.modifySymbolIfNeeded(coin)
             coins[coin.symbol] = coin
           }
         }
@@ -137,5 +140,15 @@ export default class Coinmarket {
       }
     }
     return result
+  }
+
+  /**
+   * This modifies the symbol based on the settings. This is needed because there are two coins with BTG symbol.
+   * @param coin The raw coin.
+   */
+  static modifySymbolIfNeeded(coin) {
+    if (Settings.symbolNameMapping && Settings.symbolNameMapping[coin.name]) {
+      coin.symbol = Settings.symbolNameMapping[coin.name]
+    }
   }
 }
