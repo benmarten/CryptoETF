@@ -1,6 +1,8 @@
 // noinspection NpmUsedModulesInstalled
 import request from 'request-promise'
 import Coin from './Coin'
+import * as Settings from './../Settings'
+
 
 let coins = {}
 let totalMarketCapUsd
@@ -27,7 +29,7 @@ export default class Coinmarket {
 
   static _getCoinStats() {
     let options = {
-      uri: 'https://api.coinmarketcap.com/v1/ticker/',
+      uri: 'https://api.coinmarketcap.com/v1/ticker/?limit=0',
       json: true
     }
     return request(options)
@@ -45,7 +47,7 @@ export default class Coinmarket {
    * @prop coin.market_cap_usd The market cap for the given coin in USD.
    */
   static init() {
-    console.log('Retrieving coinmarketcap statistics...')
+    console.log('Retrieving Coinmarketcap statistics...')
     return this._getTotalMarketCapUsd().then(_totalMarketCapUsd => {
       totalMarketCapUsd = _totalMarketCapUsd
       return this._getCoinStats().then(coinsRefreshed => {
@@ -54,6 +56,7 @@ export default class Coinmarket {
           let coin = coinsRefreshed[i]
           if (coin) {
             coin['market_cap_pct'] = coin.market_cap_usd / totalMarketCapUsd
+            this.modifySymbolIfNeeded(coin)
             coins[coin.symbol] = coin
           }
         }
@@ -131,11 +134,21 @@ export default class Coinmarket {
   static getCoins(limit) {
     let result = {}
     for (let key in coins) {
-      result[key] = new Coin(coins[key].symbol, 0, null, coins[key].rank)
-      if (result[key].rank === limit) {
-        break
+      let coin = coins[key]
+      if (!limit || parseInt(coin.rank) <= limit) {
+        result[key] = new Coin(coin.symbol, 0, null, coin.rank)
       }
     }
     return result
+  }
+
+  /**
+   * This modifies the symbol based on the settings. This is needed because there are two coins with BTG symbol.
+   * @param coin The raw coin.
+   */
+  static modifySymbolIfNeeded(coin) {
+    if (Settings.symbolNameMapping && Settings.symbolNameMapping[coin.name]) {
+      coin.symbol = Settings.symbolNameMapping[coin.name]
+    }
   }
 }

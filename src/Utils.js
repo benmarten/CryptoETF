@@ -1,5 +1,3 @@
-import * as Settings from './Settings'
-
 export default class Utils {
   static pad(width, string, padding) {
     return (width <= string.length) ? string : this.pad(width, padding + string, padding)
@@ -40,12 +38,12 @@ export default class Utils {
   }
 
   /**
-   * Determines if drift is above treshold defined in settings.
+   * Determines if drift is above the provided treshold.
    * @param drift The current drift.
+   * @param treshold The treshold.
    * @return {string} 'Y', if drifted, '' if not.
    */
-  static hasDriftedAboveTreshold(drift) {
-    return (Math.abs(drift) * 100 > (Settings.options.rebalanceDeltaTotalPct ||
-        Settings.options.rebalanceDeltaPct)) ? 'Y' : ''
+  static hasDriftedAboveTreshold(drift, treshold) {
+    return (Math.abs(drift) * 100 > treshold) ? 'Y' : ''
   }
 }

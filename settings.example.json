@@ -38,6 +38,9 @@
         "apiSecret": ""
     }]
   },
+  "symbolNameMapping": {
+    "Bitgem": "BITG"
+  },
   "symbolMapping": {
     "USD": "USDT",
     "STR": "XLM",
