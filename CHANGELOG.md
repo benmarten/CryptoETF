@@ -1,3 +1,20 @@
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/benmarten/CryptoETF/compare/1.5.1...1.6.0) (2018-01-06)
+
+
+### Bug Fixes
+
+* **coinmarket:** fix logic that returns only topX coins ([860ac07](https://github.com/benmarten/CryptoETF/commit/860ac07))
+* **coinmarket:** fixed duplicate symbol handling ([50bd63c](https://github.com/benmarten/CryptoETF/commit/50bd63c))
+* **ui:** fix rebalance indicator ([666e305](https://github.com/benmarten/CryptoETF/commit/666e305))
+
+
+### Features
+
+* **coinmarket:** include all possible coins ([45a72f2](https://github.com/benmarten/CryptoETF/commit/45a72f2))
+
+
+
 <a name="1.5.1"></a>
 ## [1.5.1](https://github.com/benmarten/CryptoETF/compare/1.5.0...1.5.1) (2018-01-01)
 
