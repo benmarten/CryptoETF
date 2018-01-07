@@ -43,6 +43,7 @@ The tool expects your settings in settings.json. Take a look at settings.example
   - rebalanceDeltaTotalPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing of total portfolio is recommended.
   - rebalanceDeltaPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing of individual position is recommended.
   - minValueBtc: Ignore coins that only have a holdingsvalue under a certain bitcoin value.
+  - exchangeMinValueBtc: Don't list exchanges in the exchanges column, with less than the specified BTC value. The complete holding value will still be added in the total sum.
   - hideMissingCoins: By default CryptoETF will add all missing coins up to your last coin holding by rank of the coin (global market cap). This option disables that behaviour.
 - *outputFile*: Path to a file to forward the output to as json.
 
