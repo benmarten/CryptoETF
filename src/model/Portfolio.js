@@ -1,8 +1,6 @@
 import Utils from './../Utils'
 import Coinmarket from './Coinmarket'
 // noinspection NpmUsedModulesInstalled
-import {table} from 'table'
-import Format from './../Format'
 import * as Settings from './../Settings'
 
 let portfolio = {}
@@ -21,11 +19,7 @@ export default class Portfolio {
     if (portfolio[coin.getSymbol()]) {
       let existingCoin = portfolio[coin.getSymbol()]
       existingCoin.addAmount(coin.getAmount())
-      if (coin.getAmount() > 0) {
-        existingCoin.addExchange(coin.getExchanges())
-      } else {
-        existingCoin.addExchangePossible(coin.getExchanges())
-      }
+      existingCoin.addExchange(coin.getExchanges(), coin.getAmount())
     } else {
       portfolio[coin.getSymbol()] = coin
       this.updateHighestRankWithBalance(coin)
@@ -121,123 +115,18 @@ export default class Portfolio {
   }
 
   /**
-   * Formats the output for the command line.
-   * @return {string} A string with the result.
+   * Returns the current portfolio.
+   * @return {{Object}} The portfolio.
    */
-  static getOutput() {
-    let stretchFactor = Portfolio.getStretchFactor()
-    let data = [
-      ['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'TARGET', 'TARGET', 'BUY/SELL', 'BUY/SELL', 'BUY/SELL', 'DRIFT', 'REBALANCE', 'EXCHANGES'],
-      ['', '', '', '฿', '$', 'actual %', 'target %', '฿', '$', '฿', 'ETH', '$', '%', '', '']
-    ]
-    let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
-    let targetSum = []
-    let targetValueUsd = this.getTargetValueUsd()
-    let targetValueBtc = this.getTargetValueUsd() / Coinmarket.getBtcUsd()
-    targetSum['allocationActualPct'] = 0
-    targetSum['allocationTargetPct'] = 0
-    targetSum['targetBtc'] = 0
-    targetSum['targetUsd'] = 0
-    for (let index in sortedKeys) {
-      if (!sortedKeys.hasOwnProperty(index)) {
-        continue
-      }
-      let coin = portfolio[sortedKeys[index]]
-      let allocationActualPct = coin.getRelativeMarketCap()
-      let allocationTargetPct = coin.getRelativeMarketCapRecommended() / stretchFactor
-      let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * targetValueBtc
-      let targetUsd = coin.getRelativeMarketCapRecommended() / stretchFactor * targetValueUsd
-      let drift = Math.abs((coin.getUsdValue() - targetUsd) / targetValueUsd)
-      data.push([
-        coin.getRank(),
-        coin.getSymbol(),
-        Utils.round(coin.getAmount(), 2),
-        Format.bitcoin(coin.getBtcValue()),
-        Format.money(coin.getUsdValue(), 0),
-        Format.percent(allocationActualPct),
-        Format.percent(allocationTargetPct),
-        Format.bitcoin(targetBtc),
-        Format.money(targetUsd),
-        Format.bitcoin(targetBtc - coin.getBtcValue(), 8),
-        Format.bitcoin((targetBtc - coin.getBtcValue()) / Coinmarket.getBtcEth(), 8),
-        Format.money(targetUsd - coin.getUsdValue()),
-        Format.percent(drift),
-        Utils.hasDriftedAboveTreshold(drift, Settings.options.rebalanceDeltaPct),
-        coin.getExchangesString()
-      ])
-      targetSum['allocationActualPct'] += allocationActualPct || 0
-      targetSum['allocationTargetPct'] += allocationTargetPct || 0
-      targetSum['targetBtc'] += targetBtc
-      targetSum['targetUsd'] += targetUsd
-    }
-
-    let drift = (targetSum['targetBtc'] - this.getSumBtc()) / targetSum['targetBtc']
-    data.push([
-      '',
-      '',
-      '',
-      Format.bitcoin(this.getSumBtc()),
-      Format.money(this.getSumUsd()),
-      Format.percent(targetSum['allocationActualPct']),
-      Format.percent(targetSum['allocationTargetPct']),
-      Format.bitcoin(targetSum['targetBtc']),
-      Format.money(targetSum['targetUsd']),
-      Format.bitcoin(targetSum['targetBtc'] - this.getSumBtc()),
-      '',
-      Format.money(targetSum['targetUsd'] - this.getSumUsd()),
-      Format.percent(drift),
-      Utils.hasDriftedAboveTreshold(drift, (Settings.options.rebalanceDeltaTotalPct ||
-          Settings.options.rebalanceDeltaPct)),
-      ''])
-
-    // noinspection JSUnusedGlobalSymbols
-    let config = {
-      columns: {
-        2: {
-          alignment: 'right'
-        },
-        3: {
-          alignment: 'right'
-        },
-        4: {
-          alignment: 'right'
-        },
-        5: {
-          alignment: 'right'
-        },
-        6: {
-          alignment: 'right'
-        },
-        7: {
-          alignment: 'right'
-        },
-        8: {
-          alignment: 'right'
-        },
-        9: {
-          alignment: 'right'
-        },
-        10: {
-          alignment: 'right'
-        },
-        11: {
-          alignment: 'right'
-        },
-        12: {
-          alignment: 'right'
-        },
-        13: {
-          alignment: 'right'
-        }
-      },
-      drawHorizontalLine: (index, size) => {
-        return index === 0 || index === 2 || index === size - 1 || index === size
-      }
-    }
-    return table(data, config)
+  static getPortfolio() {
+    return portfolio
   }
 
-  static getJson() {
+  /**
+   * Returns the portfolio as json string.
+   * @return {string} The portfolio as json string.
+   */
+  static getPortfolioJson() {
     return JSON.stringify(portfolio, null, 2)
   }
 }

@@ -4,6 +4,7 @@ import Coin from './model/Coin'
 import Utils from './Utils'
 import fs from 'fs'
 import * as Settings from './Settings'
+import Terminal from './model/Terminal'
 
 async function refreshPortfolio() {
   return new Promise(async (resolve) => {
@@ -48,14 +49,14 @@ async function refreshPortfolio() {
           Portfolio.removeCoin('USDT')
 
           if (Settings.outputFile) {
-            fs.writeFile(Settings.outputFile, Portfolio.getJson(), 'utf8', function(err) {
+            fs.writeFile(Settings.outputFile, Portfolio.getPortfolioJson(), 'utf8', function(err) {
               if (err) throw err
               console.log(`Saved data to ${Settings.outputFile}...`)
             })
           }
 
-
-          console.log(Portfolio.getOutput())
+          let portfolio = Portfolio.getPortfolio()
+          Terminal.printOutput(portfolio)
         }
         catch
             (error) {

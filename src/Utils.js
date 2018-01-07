@@ -1,3 +1,5 @@
+import colors from 'colors';
+
 export default class Utils {
   static pad(width, string, padding) {
     return (width <= string.length) ? string : this.pad(width, padding + string, padding)
@@ -45,5 +47,13 @@ export default class Utils {
    */
   static hasDriftedAboveTreshold(drift, treshold) {
     return (Math.abs(drift) * 100 > treshold) ? 'Y' : ''
+  }
+
+  static colorize(string) {
+    if (string.startsWith('-')) {
+      return string.red
+    } else {
+      return string.green
+    }
   }
 }

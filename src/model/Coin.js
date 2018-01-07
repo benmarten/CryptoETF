@@ -1,6 +1,7 @@
 import Coinmarket from './Coinmarket'
 import Portfolio from './Portfolio'
 import * as Settings from './../Settings'
+import _ from 'lodash'
 
 export default class Coin {
   symbol
@@ -8,7 +9,6 @@ export default class Coin {
   amount = parseFloat(0)
   rank
   exchanges = {}
-  exchangesPossible = {}
 
   constructor(symbol, amount, exchange, rank) {
     if (!symbol || (!amount && amount !== 0)) {
@@ -22,11 +22,7 @@ export default class Coin {
     this.amount = parseFloat(amount)
 
     if (exchange) {
-      if (this.amount > 0) {
-        this.addExchange(exchange)
-      } else {
-        this.addExchangePossible(exchange)
-      }
+      this.addExchange(exchange, amount)
     }
 
     if (rank) {
@@ -86,27 +82,18 @@ export default class Coin {
   /**
    * Records on which exchange the coin is traded and we hold it.
    * @param exchange The name of the exchange
+   * @param amount The amount held on the exchange
    */
-  addExchange(exchange) {
+  addExchange(exchange, amount) {
+    if (!exchange || exchange.length === 0) {
+      return
+    }
     if (typeof exchange === 'object') {
       for (let idx in exchange) {
-        this.exchanges[exchange[idx]] = 1
+        this.exchanges[exchange[idx]] = amount
       }
     }
-    this.exchanges[exchange] = 1
-  }
-
-  /**
-   * Records on which exchange the coin is traded.
-   * @param exchange The name of the exchange
-   */
-  addExchangePossible(exchange) {
-    if (typeof exchange === 'object') {
-      for (let idx in exchange) {
-        this.exchangesPossible[exchange[idx]] = 1
-      }
-    }
-    this.exchangesPossible[exchange] = 1
+    this.exchanges[exchange] = amount
   }
 
   getExchanges() {
@@ -114,12 +101,17 @@ export default class Coin {
   }
 
   getExchangesString() {
-    let result
-    if (Object.keys(this.exchanges).length > 0) {
-      result = Object.keys(this.exchanges).toString()
+    let coin = this
+    let result = _.pickBy(this.exchanges, (value) => {
+      return (value * Coinmarket.getBtcForX(coin.symbol)) >
+          (Settings.options.exchangeMinValueBtc || 0)
+    })
+    if (Object.keys(result).length > 0) {
+      result = Object.keys(result).toString()
     } else {
-      result = Object.keys(this.exchangesPossible).toString()
+      result = Object.keys(this.exchanges).toString().blue.italic
     }
+
     return (result.charAt(result.length - 1) === ',') ? result.slice(0, -1) : result
   }
 }
