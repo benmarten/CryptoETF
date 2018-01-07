@@ -52,7 +52,7 @@ describe('Testing Portfolio', () => {
     await Portfolio.addCoin(new Coin('BTC', 1.37))
     await Portfolio.addCoin(new Coin('ETH', 10))
     Portfolio.addMissingCoins(5).then()
-    let result = Portfolio.getOutput()
+    let result = Portfolio.getPortfolio()
     console.log(result)
     assert(result)
   })
