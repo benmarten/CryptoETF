@@ -1,3 +1,13 @@
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/benmarten/CryptoETF/compare/1.6.0...1.6.1) (2018-01-09)
+
+
+### Features
+
+* **ui:** colorize output; allow to hide exchanges below certain holding treshold ([94a1ac1](https://github.com/benmarten/CryptoETF/commit/94a1ac1))
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/benmarten/CryptoETF/compare/1.5.1...1.6.0) (2018-01-06)
 
