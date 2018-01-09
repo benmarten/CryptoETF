@@ -1,5 +1,3 @@
-import colors from 'colors';
-
 export default class Utils {
   static pad(width, string, padding) {
     return (width <= string.length) ? string : this.pad(width, padding + string, padding)
