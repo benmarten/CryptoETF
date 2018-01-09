@@ -1,14 +1,8 @@
-import PromiseUtils from '../../PromiseUtils'
-// noinspection NpmUsedModulesInstalled
-import request from 'requestretry'
+import AbstractWallet from './AbstractWallet'
 import Coin from './../Coin'
-import * as Settings from './../../Settings'
+import request from 'requestretry'
 
-export default class HitbtcWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.hitbtc, this._getBalanceForCredential)
-  }
-
+export default class HitbtcWallet extends AbstractWallet {
   /**
    * Returns the balances for a HitBTC account.
    * @param credential The HitBTC api credentials.

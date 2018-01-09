@@ -1,14 +1,9 @@
-import PromiseUtils from '../../PromiseUtils'
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Bitfinex from 'bitfinex'
-import * as Settings from './../../Settings'
 
-export default class BitfinexWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.bitfinex, this._getBalanceForCredential)
-  }
-
+export default class BitfinexWallet extends AbstractWallet {
   /**
    * Returns the balances for a Bitfinex account.
    * @param credential The Bitfinex api credentials.

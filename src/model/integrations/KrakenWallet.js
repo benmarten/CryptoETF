@@ -1,14 +1,9 @@
-import PromiseUtils from '../../PromiseUtils'
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import KrakenClient from 'kraken-api'
-import * as Settings from './../../Settings'
 
-export default class KrakenWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.kraken, this._getBalanceForCredential)
-  }
-
+export default class KrakenWallet extends AbstractWallet {
   /**
    * Returns the balances for a Kraken account.
    * @param credential The Kraken api credentials.

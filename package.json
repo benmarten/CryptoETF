@@ -4,6 +4,7 @@
     "binance": "^1.1.0",
     "bitfinex": "^1.0.3",
     "coinbase": "^2.0.6",
+    "colors": "^1.1.2",
     "gdax": "^0.4.2",
     "kraken-api": "^1.0.0",
     "node-bittrex-api": "^0.8.1",
@@ -31,5 +32,5 @@
     "testLocal": "./node_modules/.bin/nyc mocha --require babel-core/register test/**/*.js test/**/**/*.js",
     "test": "NODE_ENV=test npm run testLocal"
   },
-  "version": "1.6.0"
+  "version": "1.6.1"
 }

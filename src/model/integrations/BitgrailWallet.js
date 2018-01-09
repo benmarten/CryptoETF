@@ -1,16 +1,10 @@
-import PromiseUtils from '../../PromiseUtils'
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
-// noinspection NpmUsedModulesInstalled
 import request from 'request-promise'
 import crypto from 'crypto'
 import querystring from 'querystring'
-import * as Settings from './../../Settings'
 
-export default class BitgrailWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.bitgrail, this._getBalanceForCredential)
-  }
-
+export default class BitgrailWallet extends AbstractWallet {
   /**
    * Returns the balances for a Bitgrail account.
    * @param credential The Bitgrail api credentials.

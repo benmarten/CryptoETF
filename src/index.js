@@ -4,30 +4,34 @@ import Coin from './model/Coin'
 import Utils from './Utils'
 import fs from 'fs'
 import * as Settings from './Settings'
+import Terminal from './model/Terminal'
 
 async function refreshPortfolio() {
   return new Promise(async (resolve) => {
         try {
           Portfolio.clear()
           await Coinmarket.init()
-          let integrations = {}
           let promises = []
 
           for (let account in Settings.accounts) {
             let name = Utils.capitalize(account)
+            let Wallet
             try {
-              integrations[name] = require(`./model/integrations/${name}Wallet`)
+              Wallet = require(`./model/integrations/${name}Wallet`).default
             } catch (ignored) {
               console.log(`Warning: Integration for Exchange: ${name} not found!`)
               continue
             }
-            try {
-              if (Settings.accounts[account] && Settings.accounts[account].length > 0) {
-                console.log(`Retrieving ${name} balance...`)
-                promises.push(integrations[name].default.getBalance().then(coins => Portfolio.addCoins(coins)))
+
+            for (let index in Settings.accounts[account]) {
+              let credentials = Settings.accounts[account][index]
+              let integration = new Wallet(credentials)
+              console.log(`Retrieving ${name} balance...`)
+              try {
+                promises.push(integration.getBalance().then(coins => Portfolio.addCoins(coins)))
+              } catch (e) {
+                console.log(`Error: An error occured while running integration: ${name}, ${e}`)
               }
-            } catch (e) {
-              console.log(`Error: An error occured while running integration: ${name}, ${e}`)
             }
           }
 
@@ -48,14 +52,14 @@ async function refreshPortfolio() {
           Portfolio.removeCoin('USDT')
 
           if (Settings.outputFile) {
-            fs.writeFile(Settings.outputFile, Portfolio.getJson(), 'utf8', function(err) {
+            fs.writeFile(Settings.outputFile, Portfolio.getPortfolioJson(), 'utf8', function(err) {
               if (err) throw err
               console.log(`Saved data to ${Settings.outputFile}...`)
             })
           }
 
-
-          console.log(Portfolio.getOutput())
+          let portfolio = Portfolio.getPortfolio()
+          Terminal.printOutput(portfolio)
         }
         catch
             (error) {

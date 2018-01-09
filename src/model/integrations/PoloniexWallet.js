@@ -1,16 +1,10 @@
-import PromiseUtils from '../../PromiseUtils'
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Poloniex from 'poloniex-api-node'
-import * as Settings from './../../Settings'
 
-export default class PoloniexWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.poloniex, this._getBalanceForCredential)
-  }
-
+export default class PoloniexWallet extends AbstractWallet {
   /**
-   *
    * @param credential.apiKey The api key.
    * @param credential.apiSecret The api secret.
    * @prop coin.available Available amount
