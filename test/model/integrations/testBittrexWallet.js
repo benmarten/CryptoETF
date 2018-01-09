@@ -5,12 +5,13 @@ import * as Settings from './../../../src/Settings'
 
 describe('Testing Bittrex integration', () => {
   before(function() {
-    if (!Settings.accounts.binance) {
+    if (!Settings.accounts.bittrex) {
       this.skip()
     }
   })
   it('Testing initial connection and balances', async () => {
-    let wallet = await BittrexWallet.getBalance()
-    assert(wallet.length > 0)
+    let wallet = new BittrexWallet(Settings.accounts.bittrex[0])
+    let balance = await wallet.getBalance()
+    assert(balance.length > 0)
   })
 })

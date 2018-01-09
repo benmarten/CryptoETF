@@ -1,13 +1,9 @@
-import PromiseUtils from '../../PromiseUtils'
+import AbstractWallet from "./AbstractWallet"
 import Coin from '../Coin'
-import * as Settings from './../../Settings'
 // noinspection NpmUsedModulesInstalled
 const Gdax = require('gdax').AuthenticatedClient
 
-export default class GdaxWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.gdax, this._getBalanceForCredential)
-  }
+export default class GdaxWallet extends AbstractWallet {
 
   /**
    * Returns the balances for a GDAX account.
