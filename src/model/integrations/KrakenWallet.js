@@ -1,10 +1,9 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import KrakenClient from 'kraken-api'
 
 export default class KrakenWallet extends AbstractWallet {
-
   /**
    * Returns the balances for a Kraken account.
    * @param credential The Kraken api credentials.

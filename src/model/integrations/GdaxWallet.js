@@ -1,10 +1,9 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 const Gdax = require('gdax').AuthenticatedClient
 
 export default class GdaxWallet extends AbstractWallet {
-
   /**
    * Returns the balances for a GDAX account.
    * @param credential The GDAX API credentials.

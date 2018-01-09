@@ -1,10 +1,9 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Poloniex from 'poloniex-api-node'
 
 export default class PoloniexWallet extends AbstractWallet {
-
   /**
    * @param credential.apiKey The api key.
    * @param credential.apiSecret The api secret.

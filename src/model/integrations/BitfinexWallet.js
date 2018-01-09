@@ -1,10 +1,9 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Bitfinex from 'bitfinex'
 
 export default class BitfinexWallet extends AbstractWallet {
-
   /**
    * Returns the balances for a Bitfinex account.
    * @param credential The Bitfinex api credentials.
