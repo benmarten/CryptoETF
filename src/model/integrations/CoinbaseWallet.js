@@ -1,10 +1,9 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 const Coinbase = require('coinbase').Client
 
 export default class CoinbaseWallet extends AbstractWallet {
-
   /**
    * Returns the balances for a coinbase account.
    * @param credential The coinbase api credentials.

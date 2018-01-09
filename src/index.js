@@ -15,9 +15,9 @@ async function refreshPortfolio() {
 
           for (let account in Settings.accounts) {
             let name = Utils.capitalize(account)
-            let Wallet;
+            let Wallet
             try {
-              Wallet = require(`./model/integrations/${name}Wallet`).default;
+              Wallet = require(`./model/integrations/${name}Wallet`).default
             } catch (ignored) {
               console.log(`Warning: Integration for Exchange: ${name} not found!`)
               continue

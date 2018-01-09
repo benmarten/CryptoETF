@@ -1,9 +1,8 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from './../Coin'
 import request from 'requestretry'
 
 export default class HitbtcWallet extends AbstractWallet {
-
   /**
    * Returns the balances for a HitBTC account.
    * @param credential The HitBTC api credentials.

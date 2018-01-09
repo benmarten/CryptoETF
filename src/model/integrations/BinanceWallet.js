@@ -1,10 +1,9 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Binance from 'binance'
 
 export default class BinanceWallet extends AbstractWallet {
-
   /**
    * Returns the balances for a bittrex account.
    * @param credential The bittrex api credentials.

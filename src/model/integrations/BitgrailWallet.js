@@ -1,11 +1,10 @@
-import AbstractWallet from "./AbstractWallet"
+import AbstractWallet from './AbstractWallet'
 import Coin from '../Coin'
 import request from 'request-promise'
 import crypto from 'crypto'
 import querystring from 'querystring'
 
-export default class BitgrailWallet extends AbstractWallet{
-
+export default class BitgrailWallet extends AbstractWallet {
   /**
    * Returns the balances for a Bitgrail account.
    * @param credential The Bitgrail api credentials.

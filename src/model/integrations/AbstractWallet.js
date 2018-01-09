@@ -1,11 +1,16 @@
-
 export default class AbstractWallet {
-
   /**
-   * @param credentials The bittrex api credentials.
+   * @param credentials The api credentials.
    */
   constructor(credentials) {
     this.credentials = credentials
+  }
+
+  /**
+   * @return {Promise} The account balances.
+   */
+  static _getBalanceForCredential(credentials) {
+    throw new Error('Method _getBalanceForCredential() is not implemented!')
   }
 
   /**
@@ -15,12 +20,5 @@ export default class AbstractWallet {
    */
   getBalance() {
     return this.constructor._getBalanceForCredential(this.credentials)
-  }
-
-  /**
-   * @return {Promise} The account balances.
-   */
-  static _getBalanceForCredential(credentials) {
-    throw new Error('Method _getBalanceForCredential() is not implemented!')
   }
 }
