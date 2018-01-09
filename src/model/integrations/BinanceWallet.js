@@ -1,14 +1,9 @@
-import PromiseUtils from '../../PromiseUtils'
+import AbstractWallet from "./AbstractWallet"
 import Coin from '../Coin'
 // noinspection NpmUsedModulesInstalled
 import Binance from 'binance'
 
-import * as Settings from './../../Settings'
-
-export default class BinanceWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.binance, this._getBalanceForCredential)
-  }
+export default class BinanceWallet extends AbstractWallet {
 
   /**
    * Returns the balances for a bittrex account.

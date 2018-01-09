@@ -5,12 +5,13 @@ import * as Settings from './../../../src/Settings'
 
 describe('Testing HitBtc integration', () => {
   before(function() {
-    if (!Settings.accounts.binance) {
+    if (!Settings.accounts.hitbtc) {
       this.skip()
     }
   })
   it('Testing initial connection and balances', async () => {
-    let wallet = await HitbtcWallet.getBalance()
-    assert(wallet.length > 0)
+    let wallet = new HitbtcWallet(Settings.accounts.hitbtc[0])
+    let balance = await wallet.getBalance()
+    assert(balance.length > 0)
   })
 })

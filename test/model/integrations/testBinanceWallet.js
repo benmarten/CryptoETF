@@ -10,7 +10,8 @@ describe('Testing Binance integration', () => {
     }
   })
   it('Testing initial connection and balances', async () => {
-    let wallet = await BinanceWallet.getBalance()
-    assert(wallet.length > 0)
+    let wallet = new BinanceWallet(Settings.accounts.binance[0])
+    let balance = await wallet.getBalance()
+    assert(balance.length > 0)
   })
 })

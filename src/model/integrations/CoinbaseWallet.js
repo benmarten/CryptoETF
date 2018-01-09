@@ -1,13 +1,9 @@
-import PromiseUtils from '../../PromiseUtils'
+import AbstractWallet from "./AbstractWallet"
 import Coin from '../Coin'
-import * as Settings from './../../Settings'
 // noinspection NpmUsedModulesInstalled
 const Coinbase = require('coinbase').Client
 
-export default class CoinbaseWallet {
-  static getBalance() {
-    return PromiseUtils.forEachPromise(Settings.accounts.coinbase, this._getBalanceForCredential)
-  }
+export default class CoinbaseWallet extends AbstractWallet {
 
   /**
    * Returns the balances for a coinbase account.
