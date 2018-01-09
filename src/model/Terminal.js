@@ -4,6 +4,7 @@ import Portfolio from './Portfolio'
 import Format from '../Format'
 import * as Settings from '../Settings'
 import {table} from 'table'
+import colors from 'colors';
 
 export default class Terminal {
   /**
