@@ -2,6 +2,7 @@ import Coinmarket from './Coinmarket'
 import Portfolio from './Portfolio'
 import * as Settings from './../Settings'
 import _ from 'lodash'
+import colors from 'colors';
 
 export default class Coin {
   symbol
