@@ -24,7 +24,9 @@ export default class BinanceWallet extends AbstractWallet {
               let symbol = data.asset
               let amount = data.free
 
-              result.push(new Coin(symbol, amount, 'Binance'))
+              if (amount > 0) {
+                result.push(new Coin(symbol, amount, 'Binance'))
+              }
             }
             resolve(result)
           })
