@@ -5,8 +5,8 @@ import Binance from 'binance'
 
 export default class BinanceWallet extends AbstractWallet {
   /**
-   * Returns the balances for a bittrex account.
-   * @param credential The bittrex api credentials.
+   * Returns the balances for a binance account.
+   * @param credential The binance api credentials.
    * @return {Promise} The account balances.
    * @prop account The accounts for given credentials.
    * @prop account.balance The balance of the account.
