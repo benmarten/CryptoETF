@@ -14,12 +14,9 @@ export default class BinanceWallet extends AbstractWallet {
    * @prop data.free The amount.
    */
   static _getBalanceForCredential(credential) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
           const binance = new Binance.BinanceRest(credential)
-          binance.account(function(err, account) {
-            if (err) {
-              return reject(err)
-            }
+          binance.account().then(function(account) {
             let result = []
             let balances = account.balances
             for (let index in balances) {
