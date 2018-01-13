@@ -48,7 +48,7 @@ export default class Utils {
   }
 
   static colorize(string) {
-    if (string.startsWith('-')) {
+    if (string.indexOf('-') !== -1) {
       return string.red
     } else {
       return string.green

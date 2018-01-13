@@ -1,3 +1,19 @@
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/benmarten/CryptoETF/compare/1.6.1...1.6.2) (2018-01-13)
+
+
+### Bug Fixes
+
+* **binance:** fix binance integration ([b9953ab](https://github.com/benmarten/CryptoETF/commit/b9953ab))
+* **sample:** fix sample ([787688e](https://github.com/benmarten/CryptoETF/commit/787688e))
+
+
+### Features
+
+* **ui:** colorize output; allow to hide exchanges below certain holding treshold ([deb858a](https://github.com/benmarten/CryptoETF/commit/deb858a))
+
+
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/benmarten/CryptoETF/compare/1.6.0...1.6.1) (2018-01-09)
 

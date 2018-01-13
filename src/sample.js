@@ -1,25 +1,28 @@
 import Portfolio from './model/Portfolio'
 import Coinmarket from './model/Coinmarket'
 import Coin from './model/Coin'
+import Terminal from './model/Terminal'
 
 async function refreshPortfolio() {
   return new Promise(async (resolve) => {
     try {
       await Coinmarket.init()
 
-      Portfolio.addCoin(new Coin('BTC', 3, 'Coinbase'))
-      Portfolio.addCoin(new Coin('ETH', 20, 'Coinbase'))
-      Portfolio.addCoin(new Coin('BCH', 3, 'Poloniex'))
-      Portfolio.addCoin(new Coin('MIOTA', 100, 'Coinbase'))
-      Portfolio.addCoin(new Coin('XRP', 1000, 'Poloniex'))
-      Portfolio.addCoin(new Coin('LTC', 10, 'Coinbase'))
-      Portfolio.addCoin(new Coin('ADA', 200, 'Bittrex'))
-      Portfolio.addCoin(new Coin('DASH', 2, 'Poloniex'))
-      Portfolio.addCoin(new Coin('XMR', 10, 'Poloniex'))
-      Portfolio.addCoin(new Coin('XEM', 10, 'Poloniex'))
+      Portfolio.addCoin(new Coin('BTC', 1.5, 'Coinbase'))
+      Portfolio.addCoin(new Coin('ETH', 6.6, 'Coinbase'))
+      Portfolio.addCoin(new Coin('XRP', 2600, 'Poloniex'))
+      Portfolio.addCoin(new Coin('BCH', 1.14, 'Coinbase'))
+      Portfolio.addCoin(new Coin('ADA', 1779, 'Poloniex'))
+      Portfolio.addCoin(new Coin('XEM', 760, 'Coinbase'))
+      Portfolio.addCoin(new Coin('LTC', 5, 'Bittrex'))
+      Portfolio.addCoin(new Coin('XLM', 1471, 'Poloniex'))
+      Portfolio.addCoin(new Coin('MIOTA', 235, 'Poloniex'))
+      Portfolio.addCoin(new Coin('TRX', 6690, 'Poloniex'))
 
       await Portfolio.addMissingCoins()
-      console.log(Portfolio.getOutput())
+
+      let portfolio = Portfolio.getPortfolio()
+      Terminal.printOutput(portfolio)
     } catch (error) {
       console.log(error)
       console.log('Error getting data, retrying...')
