@@ -52,11 +52,23 @@ The tool expects your settings in settings.json. Take a look at settings.example
 - `npm testLocal` To run all the unit tests, with the integrations, which require you to set all api keys in settings.json.
 
 ## Contributing
+Please send PR's to the develop branch!
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+5. Submit a pull request to the develop branch :D
+
+## Releasing
+```
+git checkout develop
+git flow release start "1.6.2"
+npm run test
+npm --no-git-tag-version version 1.6.2
+git flow release finish "1.6.2"
+git push
+git checkout master && git push && git push --tags
+```
 
 ## License
 See LICENSE.md
