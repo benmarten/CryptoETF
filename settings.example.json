@@ -1,5 +1,15 @@
 {
   "accounts": {
+    "blockchain": [{
+      "addresses": [
+        ""
+      ]
+    }],
+    "etherscan": [{
+      "addresses": [
+        ""
+      ]
+    }],
     "poloniex": [{
       "apiKey": "",
       "apiSecret": ""
