@@ -11,7 +11,8 @@
     "poloniex-api-node": "^1.6.5",
     "request-promise": "^4.2.2",
     "requestretry": "^1.12.2",
-    "table": "^4.0.2"
+    "table": "^4.0.2",
+    "gate.io": "^1.0.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
