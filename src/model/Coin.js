@@ -60,7 +60,15 @@ export default class Coin {
   }
 
   getRelativeMarketCapRecommended() {
-    return Coinmarket.getRelativeMarketCapForX(this.symbol)
+    if (Settings.hasOwnProperty('allocations')) {
+      if (Settings.allocations.hasOwnProperty(this.symbol)) {
+        return Settings.allocations[this.symbol]
+      } else {
+        return 0
+      }
+    } else {
+      return Coinmarket.getRelativeMarketCapForX(this.symbol)
+    }
   }
 
   getAllocationDeltaPct() {

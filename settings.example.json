@@ -62,6 +62,10 @@
   }, {
     "BTG": 1.0
   }],
+  "allocations": {
+    "BTC": 2,
+    "ETH": 1
+  },
   "options": {
     "targetValueUsd": false,
     "rebalanceDeltaPct": 1.0,
