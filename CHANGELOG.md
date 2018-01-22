@@ -1,3 +1,13 @@
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/benmarten/CryptoETF/compare/1.7.0...1.8.0) (2018-01-22)
+
+
+### Features
+
+* **strategy:** allow for manual allocation recommendation ([#41](https://github.com/benmarten/CryptoETF/issues/41)) ([f47a63f](https://github.com/benmarten/CryptoETF/commit/f47a63f))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/benmarten/CryptoETF/compare/1.6.2...1.7.0) (2018-01-22)
 
