@@ -1,3 +1,19 @@
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/benmarten/CryptoETF/compare/1.6.2...1.7.0) (2018-01-22)
+
+
+### Bug Fixes
+
+* **ui:** fix rebalance indicator ([1348441](https://github.com/benmarten/CryptoETF/commit/1348441))
+
+
+### Features
+
+* **integrations:** add blockchain/etherscan address checkers ([#36](https://github.com/benmarten/CryptoETF/issues/36)) ([e7d7857](https://github.com/benmarten/CryptoETF/commit/e7d7857))
+* **ui:** colorize output; allow to hide exchanges below certain holding treshold ([93069f7](https://github.com/benmarten/CryptoETF/commit/93069f7))
+
+
+
 <a name="1.6.2"></a>
 ## [1.6.2](https://github.com/benmarten/CryptoETF/compare/1.6.1...1.6.2) (2018-01-13)
 
