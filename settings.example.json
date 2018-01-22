@@ -49,13 +49,16 @@
     }]
   },
   "symbolNameMapping": {
-    "Bitgem": "BITG"
+    "Remicoin": "REMI",
+    "KingN Coin": "KINGN",
+    "ENTCash": "ENTCASH"
   },
   "symbolMapping": {
     "USD": "USDT",
     "STR": "XLM",
     "IOTA": "MIOTA",
-    "XBT": "BTC"
+    "XBT": "BTC",
+    "XDG": "DOGE"
   },
   "otherHoldings": [{
     "BCH": 1.0
@@ -63,8 +66,8 @@
     "BTG": 1.0
   }],
   "allocations": {
-    "BTC": 2,
-    "ETH": 1
+    "BTC": 66,
+    "ETH": 33
   },
   "options": {
     "targetValueUsd": false,

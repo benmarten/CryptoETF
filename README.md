@@ -36,6 +36,7 @@ The tool expects your settings in settings.json. Take a look at settings.example
 - *accounts*: Under accounts, fill in your api credentials for the exchange that you want to use. Delete the exchanges that you do not need.
 - *symbolMapping*: Some exchanges use different symbols that coinmarketcap.com. Hence here you can map the symbols, e.g.: map MIOTA to IOTA.
 - *otherHoldings*: A place to manually add some of your holdings. Notation is key: Symbol, value is amount of native currency.
+- *allocations*: Here you can manually define allocations of coins. The allocations is calculated from the amount of points it gets relative to the total amount of points. Filling in `66.67` and `33.33` for two currencies will yield the same result as `6` and `3` for example. If allocations is not mentioned in settings.json the allocations will reflect the coin's market cap relative to the other coins in the portfolio.
 - *options*: These are specific options for the tool:
   - targetValueUsd: The target value for your ETF; A general rule of thumb is to keep your crypto at a certain percentage of your overall investment portfolio. This could be 5, 10, 20 or more percent, depending on your risk tolerance.
     - Default [false]: Use current portfolio value as target value.
@@ -63,6 +64,7 @@ Please send PR's to the develop branch!
 ```
 git checkout develop
 git flow release start "1.6.2"
+git rebase master
 npm run test
 npm --no-git-tag-version version 1.6.2
 git flow release finish "1.6.2"
