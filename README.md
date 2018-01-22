@@ -63,6 +63,7 @@ Please send PR's to the develop branch!
 ```
 git checkout develop
 git flow release start "1.6.2"
+git rebase master
 npm run test
 npm --no-git-tag-version version 1.6.2
 git flow release finish "1.6.2"
