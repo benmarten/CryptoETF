@@ -22,7 +22,7 @@ export default class BinanceWallet extends AbstractWallet {
             for (let index in balances) {
               let data = balances[index]
               let symbol = data.asset
-              let amount = data.free
+              let amount = Number(data.free) + Number(data.locked)
 
               result.push(new Coin(symbol, amount, 'Binance'))
             }
