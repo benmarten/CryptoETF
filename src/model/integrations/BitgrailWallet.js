@@ -17,7 +17,7 @@ export default class BitgrailWallet extends AbstractWallet {
           }
           let options = {
             method: 'POST',
-            uri: 'https://bitgrail.com/api/v1/balances',
+            uri: 'https://api.bitgrail.com/v1/balances',
             form: params,
             json: true,
             headers: {
