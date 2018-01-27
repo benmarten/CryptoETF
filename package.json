@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "babel-preset-es2015": "^6.24.1",
     "binance": "^1.1.0",
     "bitfinex": "^1.0.3",
     "coinbase": "^2.0.6",
