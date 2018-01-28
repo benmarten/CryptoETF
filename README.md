@@ -32,21 +32,21 @@ CryptoETF has API integrations with the following exchanges:
 With these exchanges, you can easily build yourself your own CryptoETF.
 
 ## Settings
-The tool expects your settings in settings.json. Take a look at settings.example.json for a starting point.
+The tool expects your settings in `settings.json`. Take a look at `settings.example.json` for a starting point.
 - *accounts*: Under accounts, fill in your api credentials for the exchange that you want to use. Delete the exchanges that you do not need.
-- *symbolMapping*: Some exchanges use different symbols that coinmarketcap.com. Hence here you can map the symbols, e.g.: map MIOTA to IOTA.
-- *otherHoldings*: A place to manually add some of your holdings. Notation is key: Symbol, value is amount of native currency.
-- *allocations*: Here you can manually define allocations of coins. The allocations is calculated from the amount of points it gets relative to the total amount of points. Filling in `66.67` and `33.33` for two currencies will yield the same result as `6` and `3` for example. If allocations is not mentioned in settings.json the allocations will reflect the coin's market cap relative to the other coins in the portfolio.
+- *symbolMapping*: Some exchanges use different symbols that coinmarketcap.com. Hence here you can map the symbols, e.g.: map `MIOTA` to `IOTA`.
+- *otherHoldings*: A place to manually add some of your holdings. Use the currency symbol as the key and the amount in native currency for its value.
+- *allocations*: Here you can manually define allocations of coins. The allocations is calculated from the amount of points it gets relative to the total amount of points. Filling in `66.67` and `33.33` for two currencies will yield the same result as `6` and `3` for example. If allocations is not mentioned in `settings.json` the allocations will reflect the coin's market cap relative to the other coins in the portfolio.
 - *options*: These are specific options for the tool:
-  - targetValueUsd: The target value for your ETF; A general rule of thumb is to keep your crypto at a certain percentage of your overall investment portfolio. This could be 5, 10, 20 or more percent, depending on your risk tolerance.
+  - `targetValueUsd`: The target value for your ETF. A general rule of thumb is to keep your crypto at a certain percentage of your overall investment portfolio. This could be 5, 10, 20 or more percent, depending on your risk tolerance.
     - Default [false]: Use current portfolio value as target value.
     - Number [1 - 999999999999]: Use fixed number as target value.
-  - rebalanceDeltaTotalPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing of total portfolio is recommended.
-  - rebalanceDeltaPct: Treshold in percent, that will show a Y in the rebalance column, once rebalancing of individual position is recommended.
-  - minValueBtc: Ignore coins that only have a holdingsvalue under a certain bitcoin value.
-  - exchangeMinValueBtc: Don't list exchanges in the exchanges column, with less than the specified BTC value. The complete holding value will still be added in the total sum.
-  - hideMissingCoins: By default CryptoETF will add all missing coins up to your last coin holding by rank of the coin (global market cap). This option disables that behaviour.
-- *outputFile*: Path to a file to forward the output to as json.
+  - `rebalanceDeltaTotalPct`: Threshold in percent, that will show a Y in the rebalance column, once rebalancing of total portfolio is recommended.
+  - `rebalanceDeltaPct`: Threshold in percent, that will show a Y in the rebalance column, once rebalancing of individual position is recommended.
+  - `minValueBtc`: Ignore coins that have a holding value lower than this. Be sure to set this to 0 when you want to display missing coins (by setting `hideMissingCoins` to `false`).
+  - `exchangeMinValueBtc`: Don't list exchanges in the exchanges column, with less than the specified BTC value. The complete holding value will still be added in the total sum.
+  - `hideMissingCoins`: By default CryptoETF will add all missing coins up to your last coin holding by rank of the coin (global market cap). This option disables that behaviour.
+- *outputFile*: Path to a file to forward the output to as JSON.
 
 ## Test
 - `npm test` To run all the unit tests, without the integrations, which require api keys.

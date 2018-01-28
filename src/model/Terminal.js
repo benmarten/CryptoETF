@@ -30,6 +30,7 @@ export default class Terminal {
         continue
       }
       let coin = portfolio[sortedKeys[index]]
+      if (coin.getBtcValue() < Settings.options.minValueBtc) { continue }
       let allocationActualPct = coin.getRelativeMarketCap()
       let allocationTargetPct = coin.getRelativeMarketCapRecommended() / stretchFactor
       let targetBtc = coin.getRelativeMarketCapRecommended() / stretchFactor * targetValueBtc
