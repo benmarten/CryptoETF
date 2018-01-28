@@ -36,6 +36,10 @@
     "bitgrail": [{
         "apiKey": "",
         "apiSecret": ""
+    }],
+    "gate": [{
+      "apiKey": "",
+      "apiSecret": ""
     }]
   },
   "symbolNameMapping": {
