@@ -6,9 +6,10 @@ export default class Format {
       return ''
     }
     let formatter = new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 0
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     })
-    return formatter.format(parseInt(number))
+    return formatter.format(parseFloat(number))
   }
 
   static percent(number) {
@@ -19,7 +20,7 @@ export default class Format {
   }
 
   static bitcoin(number, chars_) {
-    let chars = (chars_) ? chars_ : 2
+    let chars = (chars_) ? chars_ : 8
     if (!number) {
       return ''
     }
