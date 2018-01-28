@@ -1,3 +1,39 @@
+<a name="1.8.1"></a>
+## [1.8.1](https://github.com/benmarten/CryptoETF/compare/1.8.0...1.8.1) (2018-01-27)
+
+
+### Bug Fixes
+
+* **integrations/bitgrail:** fix bitgrail api url ([2d59631](https://github.com/benmarten/CryptoETF/commit/2d59631))
+
+
+
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/benmarten/CryptoETF/compare/1.7.0...1.8.0) (2018-01-22)
+
+
+### Features
+
+* **strategy:** allow for manual allocation recommendation ([#41](https://github.com/benmarten/CryptoETF/issues/41)) ([f47a63f](https://github.com/benmarten/CryptoETF/commit/f47a63f))
+
+
+
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/benmarten/CryptoETF/compare/1.6.2...1.7.0) (2018-01-22)
+
+
+### Bug Fixes
+
+* **ui:** fix rebalance indicator ([1348441](https://github.com/benmarten/CryptoETF/commit/1348441))
+
+
+### Features
+
+* **integrations:** add blockchain/etherscan address checkers ([#36](https://github.com/benmarten/CryptoETF/issues/36)) ([e7d7857](https://github.com/benmarten/CryptoETF/commit/e7d7857))
+* **ui:** colorize output; allow to hide exchanges below certain holding treshold ([93069f7](https://github.com/benmarten/CryptoETF/commit/93069f7))
+
+
+
 <a name="1.6.2"></a>
 ## [1.6.2](https://github.com/benmarten/CryptoETF/compare/1.6.1...1.6.2) (2018-01-13)
 
