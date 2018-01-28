@@ -5,8 +5,8 @@ import GateIo from 'gate.io'
 
 export default class GateWallet extends AbstractWallet {
   /**
-   * Returns the balances for a bittrex account.
-   * @param credential The bittrex api credentials.
+   * Returns the balances for a Gate.io account.
+   * @param credential The Gate.io api credentials.
    * @return {Promise} The account balances.
    * @prop account The accounts for given credentials.
    * @prop account.balance The balance of the account.
