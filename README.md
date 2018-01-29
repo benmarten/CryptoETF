@@ -43,7 +43,7 @@ The tool expects your settings in `settings.json`. Take a look at `settings.exam
     - Number [1 - 999999999999]: Use fixed number as target value.
   - `rebalanceDeltaTotalPct`: Threshold in percent, that will show a Y in the rebalance column, once rebalancing of total portfolio is recommended.
   - `rebalanceDeltaPct`: Threshold in percent, that will show a Y in the rebalance column, once rebalancing of individual position is recommended.
-  - `minValueBtc`: Ignore coins that have a holding value lower than this. Be sure to set this to 0 when you want to display missing coins (by setting `hideMissingCoins` to `false`).
+  - `minValueBtc`: Ignore coins that have a holding value lower than this. Be sure to set this to 0 when you want to display missing coins (by setting `hideMissingCoins` to `false`) or when manually allocation your coins.
   - `exchangeMinValueBtc`: Don't list exchanges in the exchanges column, with less than the specified BTC value. The complete holding value will still be added in the total sum.
   - `hideMissingCoins`: By default CryptoETF will add all missing coins up to your last coin holding by rank of the coin (global market cap). This option disables that behaviour.
 - *outputFile*: Path to a file to forward the output to as JSON.
