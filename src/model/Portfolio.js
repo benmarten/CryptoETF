@@ -31,7 +31,7 @@ export default class Portfolio {
    * @param coin The coin
    */
   static updateHighestRankWithBalance(coin) {
-    if (coin.getBtcValue() > Settings.options.minValueBtc && coin.getRank() >= 0) {
+    if (coin.getBtcValue() && coin.getRank() >= 0) {
       highestRank = (coin.getRank() > highestRank) ? coin.getRank() : highestRank
     }
   }
