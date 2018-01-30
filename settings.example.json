@@ -75,7 +75,8 @@
     "rebalanceDeltaTotalPct": 10.0,
     "minValueBtc": 0.0001,
     "exchangeMinValueBtc": 0.0001,
-    "hideMissingCoins": false
+    "hideMissingCoins": false,
+    "compactMode": false
   },
   "outputFile": false
 }

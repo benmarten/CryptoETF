@@ -114,10 +114,19 @@ export default class Coin {
       return (value * Coinmarket.getBtcForX(coin.symbol)) >
           (Settings.options.exchangeMinValueBtc || 0)
     })
-    if (Object.keys(result).length > 0) {
-      result = Object.keys(result).toString()
+    if (Settings.options.compactMode) {
+      let resultlong = Object.keys(result).length > 0 ? Object.keys(result) : Object.keys(this.exchanges);
+      result = []
+      for (var i = 0; i < resultlong.length; i++) {
+        result.push(resultlong[i].substr(0,3))
+      }
+      result = result.toString()
     } else {
-      result = Object.keys(this.exchanges).toString().blue.italic
+      if (Object.keys(result).length > 0) {
+        result = Object.keys(result).toString()
+      } else {
+        result = Object.keys(this.exchanges).toString().blue.italic
+      }
     }
 
     return (result.charAt(result.length - 1) === ',') ? result.slice(0, -1) : result

@@ -13,10 +13,15 @@ export default class Terminal {
    */
   static printOutput(portfolio) {
     let stretchFactor = Portfolio.getStretchFactor()
-    let data = [
+    let data = Settings.options.compactMode ?
+    [
+      ['#', 'SYM', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOC', 'ALLOC', 'TARGET', 'TARGET', 'B(-)/S(+)', 'B(-)/S(+)', 'B(-)/S(+)', 'DRIFT', '', 'EXCHANGES'],
+      ['', '', '', '฿', '$', 'act%', 'tar%', '฿', '$', '฿', 'ETH', '$', '%', '', '']
+    ] :
+    [
       ['#', 'SYMBOL', 'AMOUNT', 'VALUE', 'VALUE', 'ALLOCATION', 'ALLOCATION', 'TARGET', 'TARGET', 'BUY(-)/SELL(+)', 'BUY(-)/SELL(+)', 'BUY(-)/SELL(+)', 'DRIFT', 'REBALANCE', 'EXCHANGES'],
       ['', '', '', '฿', '$', 'actual %', 'target %', '฿', '$', '฿', 'ETH', '$', '%', '', '']
-    ]
+    ];
     let sortedKeys = Utils.getSortedKeys(portfolio, 'rank')
     let targetSum = []
     let targetValueUsd = Portfolio.getTargetValueUsd()
