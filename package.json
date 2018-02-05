@@ -4,6 +4,7 @@
     "bitfinex": "^1.0.3",
     "coinbase": "^2.0.6",
     "colors": "^1.1.2",
+    "gate.io": "^1.0.0",
     "gdax": "^0.4.2",
     "kraken-api": "^1.0.0",
     "node-bittrex-api": "^0.8.1",

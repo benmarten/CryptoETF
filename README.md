@@ -28,6 +28,7 @@ CryptoETF has API integrations with the following exchanges:
 - Bitfinex. Join Here: https://www.bitfinex.com
 - Kraken. Join Here: https://www.kraken.com
 - Bitgrail. Join Here: https://bitgrail.com
+- Gate.io. Join Here: https://gate.io
 
 With these exchanges, you can easily build yourself your own CryptoETF.
 
