@@ -10,6 +10,9 @@
         ""
       ]
     }],
+    "ethplorer": [{
+      "address": ""
+    }],
     "poloniex": [{
       "apiKey": "",
       "apiSecret": ""

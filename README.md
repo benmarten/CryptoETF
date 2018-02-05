@@ -32,6 +32,12 @@ CryptoETF has API integrations with the following exchanges:
 
 With these exchanges, you can easily build yourself your own CryptoETF.
 
+##APIs
+These APIs are used to monitor wallet addresses:
+- [Blockchain.info](https://blockchain.info/api/blockchain_api) for multiple BTC addresses
+- [Etherscan.io](https://etherscan.io/apis) for multiple ETH addresses
+- [Ethplorer.io](https://github.com/EverexIO/Ethplorer/wiki/Ethplorer-API) for a single ETH address including all tokens.
+
 ## Settings
 The tool expects your settings in settings.json. Take a look at settings.example.json for a starting point.
 - *accounts*: Under accounts, fill in your api credentials for the exchange that you want to use. Delete the exchanges that you do not need.
