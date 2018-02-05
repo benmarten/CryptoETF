@@ -136,3 +136,4 @@ tags
 settings.json
 yarn.lock
 dist/
+package-lock.json
