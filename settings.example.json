@@ -58,7 +58,8 @@
     "STR": "XLM",
     "IOTA": "MIOTA",
     "XBT": "BTC",
-    "XDG": "DOGE"
+    "XDG": "DOGE",
+    "NANO": "XRB"
   },
   "otherHoldings": [{
     "BCH": 1.0
