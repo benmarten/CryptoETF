@@ -8,6 +8,9 @@
     "etherscan": [{
       "addresses": [
         ""
+      ],
+      "from": [
+        ""
       ]
     }],
     "poloniex": [{
